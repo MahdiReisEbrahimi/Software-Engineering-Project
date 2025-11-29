@@ -19,6 +19,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@kalimahapps/vue-icons": "^1.9.5",
     "autoprefixer": "^9.8.8",
     "pinia": "^3.0.3",
     "postcss": "^7.0.39",
