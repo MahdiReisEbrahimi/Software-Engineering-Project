@@ -4,10 +4,13 @@ import { useRouter } from 'vue-router'
 import { CaUserAvatarFilled } from '@kalimahapps/vue-icons'
 import { BsPersonFillAdd } from '@kalimahapps/vue-icons'
 import { HeFilledArtificialIntelligence } from '@kalimahapps/vue-icons'
-import { MiSolidArticle } from '@kalimahapps/vue-icons';
-import { CoBrandAboutMe } from '@kalimahapps/vue-icons';
-import { HeOutlineCityWorker } from '@kalimahapps/vue-icons';
-import { FaMapLocationDot } from '@kalimahapps/vue-icons';
+import { MiSolidArticle } from '@kalimahapps/vue-icons'
+import { CoBrandAboutMe } from '@kalimahapps/vue-icons'
+import { HeOutlineCityWorker } from '@kalimahapps/vue-icons'
+import { FaMapLocationDot } from '@kalimahapps/vue-icons'
+import { ChMenuHamburger } from '@kalimahapps/vue-icons'
+import { AnOutlinedClose } from '@kalimahapps/vue-icons'
+import { LaThinkPeaks } from '@kalimahapps/vue-icons'
 
 const isOpen = ref(false)
 
@@ -32,23 +35,41 @@ const iconComponents: Record<string, Component> = {
 <template>
   <!-- Desktop Sidebar -->
   <aside
-    class="hidden md:flex fixed inset-y-0 left-0 w-64 bg-gray-800 text-white p-6 shadow-xl overflow-y-auto"
+    class="hidden md:flex flex-col fixed inset-y-0 left-0 w-56 bg-black text-white shadow-xl overflow-y-auto"
   >
-    <ul class="flex flex-col gap-4 text-lg">
-      <li v-for="route in allRoutes" :key="route.name" class="hover:bg-gray-700 px-2 py-2 rounded">
-        <router-link :to="route.path">{{ route.name }}</router-link>
+    <div class="flex items-center gap-2 text-2xl font-bold mt-5 ml-5">
+      <LaThinkPeaks />
+      <h1>My APP</h1>
+    </div>
+    <ul class="flex flex-col text-lg w-full mt-5">
+      <li
+        v-for="route in allRoutes"
+        :key="route.name"
+        class="h-12 items-middle align-middle w-full cursor-pointer"
+      >
+        <router-link
+          @click="isOpen = false"
+          :to="route.path"
+          class="w-full p-0 m-0 h-full flex items-center hover:bg-gray-700"
+        >
+          <div class="flex justify-start items-center gap-7 pl-7">
+            <component :is="iconComponents[route.meta?.icon as string]" />
+            {{ route.name }}
+          </div>
+        </router-link>
       </li>
     </ul>
   </aside>
 
   <!-- Mobile Top Navigation -->
   <nav
-    class="md:hidden flex items-center justify-between bg-gray-700 text-white fixed top-0 left-0 right-0 z-40"
+    class="md:hidden flex items-center justify-between p-4 bg-gray-700 text-white fixed top-0 left-0 right-0 z-40"
   >
-    <div class="text-xl font-bold">-----</div>
+    <div class="text-xl font-bold ml-4">My APP</div>
 
-    <button class="focus:outline-none w-10" @click="toggleMenu">
-      <img src="@/icons/burger.svg" alt="burger" />
+    <button class="focus:outline-none text-2xl" @click="toggleMenu">
+      <ChMenuHamburger v-show="!isOpen" />
+      <AnOutlinedClose v-show="isOpen" />
     </button>
   </nav>
 
@@ -56,21 +77,19 @@ const iconComponents: Record<string, Component> = {
   <transition name="dropdown">
     <div
       v-if="isOpen"
-      class="md:hidden absolute top-14 left-0 right-0 bg-gray-800 text-white z-30 shadow-lg"
+      class="md:hidden absolute top-16 left-0 right-0 bg-gray-800 text-white z-30 shadow-lg"
     >
       <ul class="flex flex-col text-lg">
-        <li
-          v-for="route in allRoutes"
-          :key="route.name"
-          class="flex justify-start items-center gap-2 pl-4 h-12 hover:bg-gray-700 items-middle align-middle w-full cursor-pointer"
-        >
-          <component :is="iconComponents[route.meta?.icon as string]" />
+        <li v-for="route in allRoutes" :key="route.name" class="w-full cursor-pointer">
           <router-link
             @click="isOpen = false"
             :to="route.path"
-            class="w-full block p-0 m-0 hover:bg-gray-700 py-2"
+            class="w-full block hover:bg-gray-700 py-2 pl-8"
           >
-            {{ route.name }}
+            <div class="flex items-center gap-5">
+              <component :is="iconComponents[route.meta?.icon as string]" />
+              {{ route.name }}
+            </div>
           </router-link>
         </li>
       </ul>
