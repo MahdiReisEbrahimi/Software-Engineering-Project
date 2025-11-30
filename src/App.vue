@@ -4,6 +4,11 @@ import MainNavigation from './layout/MainNavigation.vue'
 </script>
 
 <template>
-  <MainNavigation />
-  <RouterView />
+  <div class="flex h-screen">
+    <MainNavigation class="w-52 shrink-0" />
+
+    <div class="flex-1 mt-16 overflow-hidden">
+      <RouterView />
+    </div>
+  </div>
 </template>

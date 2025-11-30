@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { ref, type Component } from 'vue'
 import { useRouter } from 'vue-router'
-import { CaUserAvatarFilled } from '@kalimahapps/vue-icons'
-import { BsPersonFillAdd } from '@kalimahapps/vue-icons'
-import { HeFilledArtificialIntelligence } from '@kalimahapps/vue-icons'
-import { MiSolidArticle } from '@kalimahapps/vue-icons'
-import { CoBrandAboutMe } from '@kalimahapps/vue-icons'
-import { HeOutlineCityWorker } from '@kalimahapps/vue-icons'
-import { FaMapLocationDot } from '@kalimahapps/vue-icons'
-import { ChMenuHamburger } from '@kalimahapps/vue-icons'
-import { AnOutlinedClose } from '@kalimahapps/vue-icons'
-import { LaThinkPeaks } from '@kalimahapps/vue-icons'
+import {
+  CaUserAvatarFilled,
+  FaMapLocationDot,
+  BsPersonFillAdd,
+  HeFilledArtificialIntelligence,
+  MiSolidArticle,
+  CoBrandAboutMe,
+  HeOutlineCityWorker,
+  LaThinkPeaks,
+  AnOutlinedClose,
+  ChMenuHamburger,
+} from '@kalimahapps/vue-icons'
 
 const isOpen = ref(false)
 
@@ -35,7 +37,7 @@ const iconComponents: Record<string, Component> = {
 <template>
   <!-- Desktop Sidebar -->
   <aside
-    class="hidden md:flex flex-col fixed inset-y-0 left-0 w-56 bg-black text-white shadow-xl overflow-y-auto"
+    class="hidden sm:flex flex-col fixed inset-y-0 left-0 w-56 bg-black text-white shadow-xl overflow-y-auto"
   >
     <div class="flex items-center gap-2 text-2xl font-bold mt-5 ml-5">
       <LaThinkPeaks />
