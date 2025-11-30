@@ -1,0 +1,655 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.471318,
+          35.670138
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.384217,
+          35.712453
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.403067,
+          35.683133
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 4"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.4855,
+          35.695139
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 5"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.424942,
+          35.676091
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 6"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.462044,
+          35.692918
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 7"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.244407,
+          35.721921
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 8"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.426583,
+          35.629323
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 9"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.238494,
+          35.626782
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.30578,
+          35.797089
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 11"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.284763,
+          35.723742
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 12"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.344621,
+          35.727192
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 13"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.310313,
+          35.643023
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 14"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.364911,
+          35.74664
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 15"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.339264,
+          35.616593
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 16"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.485699,
+          35.736579
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 17"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.211581,
+          35.725166
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 18"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.367329,
+          35.732523
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 19"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.486622,
+          35.706259
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 20"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.369368,
+          35.775199
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 21"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.266406,
+          35.652263
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 22"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.418748,
+          35.738904
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 23"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.342937,
+          35.686344
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 24"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.48571,
+          35.698859
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 25"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.36838,
+          35.660595
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 26"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.480095,
+          35.62321
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 27"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.326747,
+          35.708945
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 28"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.206043,
+          35.614567
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 29"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.439911,
+          35.670569
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 30"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.239926,
+          35.617984
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 31"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.477983,
+          35.695748
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 32"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.240457,
+          35.609505
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 33"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.459711,
+          35.683981
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 34"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.314452,
+          35.623301
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 35"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.36961,
+          35.718059
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 36"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.331651,
+          35.625156
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 37"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.416105,
+          35.626355
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 38"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.311826,
+          35.663451
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 39"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.437326,
+          35.710087
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 40"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.357028,
+          35.793303
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 41"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.200621,
+          35.778933
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 42"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.469565,
+          35.654711
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 43"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.37758,
+          35.768209
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 44"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.224384,
+          35.73165
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 45"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.428634,
+          35.691264
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 46"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.358351,
+          35.727694
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 47"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.403529,
+          35.708656
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 48"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.307205,
+          35.759184
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 49"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.239321,
+          35.621638
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Lawyer 50"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.216897,
+          35.703757
+        ]
+      }
+    }
+  ]
+}
