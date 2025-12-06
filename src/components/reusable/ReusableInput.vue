@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-pink-200 px-2 w-full flex items-center p-1.5 rounded-lg my-2">
+  <div class="bg-white px-2 w-full flex items-center p-1.5 rounded-lg my-2">
     <!-- prefix icon -->
     <component v-if="props.prefixIcon" :is="icons[props.prefixIcon]" class="text-lg mr-3" />
     <input
-      class="rounded-sm border-none bg-pink-200 blur:border-none border border-gray-300 focus:outline-none focus:border-gray-300"
+      class="rounded-sm border-none bg-white blur:border-none border border-gray-300 focus:outline-none focus:border-gray-300"
       :type="inputType"
       :placeholder="props.placeHolder"
       v-model.trim="modelValue"

@@ -1,5 +1,9 @@
 <template>
   <div id="map" class="h-2/3 m-2"></div>
+  <div class="w-100 p-2 text-center bg-black">
+    <h1 class="fornt-bold mb-2">${feature.properties.name}</h1>
+    <img src="/lowyer-picture.png" alt="lowyerPic" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -24,7 +28,7 @@ onMounted(() => {
     .then((data) => {
       L.geoJSON(data, {
         pointToLayer: (feature, latlng) => {
-          const marker = L.marker(latlng).bindPopup(`<b>${feature.properties.name}</b>`)
+          const marker = L.marker(latlng).bindPopup(`<div>${feature.properties.name}</div>`)
           markers.addLayer(marker)
           return marker
         },

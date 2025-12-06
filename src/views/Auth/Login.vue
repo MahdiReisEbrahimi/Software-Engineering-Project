@@ -5,6 +5,7 @@
     <div class="p-2 mx-auto my-4 w-8 rounded-xl shadow-lg bg-white">
       <ChSignIn />
     </div>
+
     <div>
       <h2 class="font-bold text-center text-xl">Sign in with email</h2>
       <p class="text-sm mt-3 text-center">Make us a new Loyal lowyer for you!</p>
