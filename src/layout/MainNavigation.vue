@@ -37,9 +37,9 @@ const iconComponents: Record<string, Component> = {
 <template>
   <!-- Desktop Sidebar -->
   <aside
-    class="hidden sm:flex flex-col fixed inset-y-0 left-0 w-56 bg-black text-white shadow-xl overflow-y-auto"
+    class="hidden md:flex flex-col fixed inset-y-0 right-0 w-56 bg-black text-white shadow-xl overflow-y-auto"
   >
-    <div class="flex items-center gap-2 text-2xl font-bold mt-5 ml-5">
+    <div class="flex items-center gap-2 text-2xl font-bold mt-5 mr-5">
       <LaThinkPeaks />
       <h1>My APP</h1>
     </div>
@@ -54,9 +54,9 @@ const iconComponents: Record<string, Component> = {
           :to="route.path"
           class="w-full p-0 m-0 h-full flex items-center hover:bg-gray-700"
         >
-          <div class="flex justify-start items-center gap-7 pl-7">
+          <div class="flex justify-start items-center gap-7 pr-7">
             <component :is="iconComponents[route.meta?.icon as string]" />
-            {{ route.name }}
+            {{ $t('navigation.' + route.name?.toString()!) }}
           </div>
         </router-link>
       </li>
@@ -67,7 +67,7 @@ const iconComponents: Record<string, Component> = {
   <nav
     class="md:hidden flex items-center justify-between p-4 bg-gray-700 text-white fixed top-0 left-0 right-0 z-40"
   >
-    <div class="text-xl font-bold ml-4">My APP</div>
+    <div class="text-xl font-bold mr-4">My APP</div>
 
     <button class="focus:outline-none text-2xl" @click="toggleMenu">
       <ChMenuHamburger v-show="!isOpen" />
@@ -86,11 +86,11 @@ const iconComponents: Record<string, Component> = {
           <router-link
             @click="isOpen = false"
             :to="route.path"
-            class="w-full block hover:bg-gray-700 py-2 pl-8"
+            class="w-full block hover:bg-gray-700 py-2 pr-8"
           >
             <div class="flex items-center gap-5">
               <component :is="iconComponents[route.meta?.icon as string]" />
-              {{ route.name }}
+              {{ $t('navigation.' + route.name?.toString()!) }}
             </div>
           </router-link>
         </li>

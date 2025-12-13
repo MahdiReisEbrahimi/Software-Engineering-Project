@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'AI Chat',
+      name: 'aiChat',
       component: () => import('@/views/chatbot/ChatBot.vue'),
       meta: {
         icon: 'HeFilledArtificialIntelligence',
@@ -13,7 +13,7 @@ const router = createRouter({
     },
     {
       path: '/map',
-      name: 'Map',
+      name: 'map',
       component: () => import('@/views/map/Map.vue'),
       meta: {
         icon: 'FaMapLocationDot',
@@ -21,7 +21,7 @@ const router = createRouter({
     },
     {
       path: '/lowyers',
-      name: 'Lowyers',
+      name: 'lowyers',
       component: import('@/views/lowyers/Lowyers.vue'),
       meta: {
         icon: 'HeOutlineCityWorker',
@@ -29,7 +29,7 @@ const router = createRouter({
     },
     {
       path: '/weblog',
-      name: 'Weblog',
+      name: 'weblog',
       component: () => import('@/views/weblog/Weblog.vue'),
       meta: {
         icon: 'MiSolidArticle',
@@ -37,7 +37,7 @@ const router = createRouter({
     },
     {
       path: '/profile',
-      name: 'Profile',
+      name: 'profile',
       component: () => import('@/views/profile/Profile.vue'),
       meta: {
         icon: 'CaUserAvatarFilled',
@@ -45,7 +45,7 @@ const router = createRouter({
     },
     {
       path: '/Auth',
-      name: 'Login',
+      name: 'login',
       component: () => import('@/views/Auth/Login.vue'),
       meta: {
         icon: 'BsPersonFillAdd',
@@ -53,7 +53,7 @@ const router = createRouter({
     },
     {
       path: '/about',
-      name: 'About us',
+      name: 'aboutUs',
       component: () => import('@/views/aboutUs/About.vue'),
       meta: {
         icon: 'CoBrandAboutMe',
