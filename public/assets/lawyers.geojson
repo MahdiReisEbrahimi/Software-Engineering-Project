@@ -5,7 +5,12 @@
       "type": "Feature",
       "properties": {
         "name": "اصغر ابراهیمی",
-        "imgLink": "lowyer-picture.png"
+        "imgLink": "lowyer-picture.png",
+        "experience": 10,
+
+        "ratingScore": 5,
+        "reviews": ["he is a good lowyer", "he is the best"],
+        "services": ["دعواهای خانوادگی", "اختلافات ارث و میراث", "دعاوی سیاسی"]
       },
       "geometry": {
         "type": "Point",
@@ -15,12 +20,16 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "محمد اخلاقی",
-        "imgLink": "lowyer-picture.png"
+        "name": "ممد ابراهیمی",
+        "imgLink": "l2.jpg",
+        "experience": 10,
+        "ratingScore": 5,
+        "reviews": ["he is a good lowyer", "he is the best"],
+        "services": ["دعواهای خانوادگی", "اختلافات ارث و میراث", "دعاوی سیاسی"]
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [51.384217, 35.712453]
+        "coordinates": [50, 34]
       }
     }
   ]

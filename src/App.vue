@@ -5,7 +5,7 @@ import MainNavigation from './layout/MainNavigation.vue'
 
 <template>
   <div class="flex h-screen">
-    <MainNavigation class="w-52 shrink-0" />
+    <MainNavigation />
 
     <div class="flex-1 mt-16 md:mt-0 md:mr-56 overflow-hidden">
       <RouterView />

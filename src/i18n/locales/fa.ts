@@ -8,4 +8,7 @@ export default {
     login: 'ورود',
     aboutUs: 'درباره ما',
   },
+  mapPage: {
+    findYourNearLoawyer: 'وکیل نزدیکتو پیدا کن'
+  }
 } as const

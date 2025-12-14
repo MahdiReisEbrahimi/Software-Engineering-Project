@@ -9,3 +9,12 @@ export interface User {
   }
 }
 
+export interface LowyerInfoType {
+  name: string
+  experience: number
+  imgLink: string
+  ratingScore: number
+  reviews: string[]
+  services: string[]
+}
+
