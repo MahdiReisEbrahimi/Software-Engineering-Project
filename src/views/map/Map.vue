@@ -4,7 +4,11 @@
     <BxSearchAlt class="text-xl mr-2" />
   </div>
   <div id="map" class="h-1/2 m-2"></div>
-  <LowyerDetails :lowyerInfo="openLowyerDetails" :newClick="showDetails" />
+  <div v-if="showDetails" class="flex py-4 mx-2 w-90vw justify-between">
+    <NextLastBtn direction="right" @click="(direction) => nextLastBtnHandler(direction)" />
+    <LowyerDetails :lowyerInfo="focusedLowyer!" />
+    <NextLastBtn direction="left" @click="(direction) => nextLastBtnHandler(direction)" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -13,16 +17,13 @@ import L from 'leaflet'
 import 'leaflet.markercluster'
 import { BxSearchAlt } from '@kalimahapps/vue-icons'
 import LowyerDetails from './components/LowyerDetails.vue'
+import NextLastBtn from '@/components/reusable/NextLastBtn.vue'
+import type { LowyerInfoType } from '@/Types/User'
 
 const showDetails = ref(false)
-const openLowyerDetails = ref({
-  name: 'Mahdi',
-  experience: 10,
-  imgLink: '',
-  ratingScore: 0,
-  reviews: [],
-  services: [],
-})
+const focusedLowyer = ref<LowyerInfoType>()
+const allLowyers = ref<LowyerInfoType[]>([])
+
 const markers = L.markerClusterGroup({
   showCoverageOnHover: false,
   maxClusterRadius: 40,
@@ -40,13 +41,10 @@ onMounted(() => {
     .then((data) => {
       L.geoJSON(data, {
         pointToLayer: (feature, latlng) => {
-          const properties = feature.properties
-          const name = properties.name
-          const experience = properties.age
+          const properties: LowyerInfoType = feature.properties
+          allLowyers.value.push(properties)
+
           const imgLink = properties.imgLink
-          const ratingScore = properties.ratingScore
-          const reviews = properties.reviews
-          const services = properties.services
 
           const lowyerImg = L.icon({
             iconUrl: `/assets/img/${imgLink}`,
@@ -60,13 +58,14 @@ onMounted(() => {
           marker.on('mouseout', () => marker.closePopup())
           marker.on('click', () => {
             showDetails.value = false
-            openLowyerDetails.value = {
-              name,
-              experience,
-              imgLink,
-              ratingScore,
-              reviews,
-              services,
+            focusedLowyer.value = {
+              id: properties.id,
+              name: properties.name,
+              experience: properties.experience,
+              imgLink: properties.imgLink,
+              ratingScore: properties.ratingScore,
+              reviews: properties.reviews,
+              services: properties.services,
             }
             showDetails.value = true
           })
@@ -79,6 +78,20 @@ onMounted(() => {
       map.addLayer(markers)
     })
 })
+
+function nextLastBtnHandler(direction: string) {
+  const id = focusedLowyer.value?.id
+  let index = allLowyers.value.findIndex((l) => l.id === id)
+
+  if (direction === 'right') index++
+  if (direction === 'left') index--
+
+  if (index < 0) index = allLowyers.value.length - 1
+  index = index % allLowyers.value.length
+
+  focusedLowyer.value = allLowyers.value[index]
+  showDetails.value = true
+}
 </script>
 <style scoped>
 ::v-deep .leaflet-marker-icon {
