@@ -54,7 +54,7 @@ onMounted(() => {
           const lowyerImg = L.icon({
             iconUrl: `/assets/img/${imgLink}`,
             iconSize: [40, 40],
-            iconAnchor: [40, 40],
+            iconAnchor: [20, 20],
             className: 'markerrrr',
           })
           const marker = L.marker(latlng, { icon: lowyerImg })
