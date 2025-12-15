@@ -29,19 +29,24 @@ const markers = L.markerClusterGroup({
   maxClusterRadius: 40,
 })
 
+const map = ref<L.Map>()
+
 onMounted(() => {
-  const map = L.map('map').setView([35.67, 51.471], 12)
+  map.value = L.map('map').setView([35.67, 51.471], 12)
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-  }).addTo(map)
+  }).addTo(map.value)
 
   fetch('/assets/lawyers.geojson')
     .then((res) => res.json())
     .then((data) => {
       L.geoJSON(data, {
         pointToLayer: (feature, latlng) => {
-          const properties: LowyerInfoType = feature.properties
+          const properties: LowyerInfoType = {
+            ...feature.properties,
+            coordinates: [latlng.lat, latlng.lng],
+          }
           allLowyers.value.push(properties)
 
           const imgLink = properties.imgLink
@@ -66,7 +71,9 @@ onMounted(() => {
               ratingScore: properties.ratingScore,
               reviews: properties.reviews,
               services: properties.services,
+              coordinates: [feature.geometry.coordinates[1]!, feature.geometry.coordinates[0]!],
             }
+            map.value?.flyTo(focusedLowyer.value?.coordinates, 14)
             showDetails.value = true
           })
 
@@ -75,21 +82,29 @@ onMounted(() => {
         },
       })
 
-      map.addLayer(markers)
+      map.value?.addLayer(markers)
     })
 })
 
 function nextLastBtnHandler(direction: string) {
-  const id = focusedLowyer.value?.id
+  if (!focusedLowyer.value || allLowyers.value.length === 0) return
+
+  const id = focusedLowyer.value.id
   let index = allLowyers.value.findIndex((l) => l.id === id)
 
   if (direction === 'right') index++
   if (direction === 'left') index--
 
   if (index < 0) index = allLowyers.value.length - 1
-  index = index % allLowyers.value.length
+  index %= allLowyers.value.length
 
   focusedLowyer.value = allLowyers.value[index]
+
+  if (map.value && focusedLowyer.value?.coordinates) {
+    const [lat, lng] = focusedLowyer.value.coordinates
+    map.value.flyTo([lat, lng], 14)
+  }
+
   showDetails.value = true
 }
 </script>

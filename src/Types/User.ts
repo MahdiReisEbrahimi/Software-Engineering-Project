@@ -10,11 +10,12 @@ export interface User {
 }
 
 export interface LowyerInfoType {
+  id: number
   name: string
   experience: number
   imgLink: string
   ratingScore: number
   reviews: string[]
   services: string[]
+  coordinates: [number, number]
 }
-

@@ -4,10 +4,10 @@
     {
       "type": "Feature",
       "properties": {
+        "id" : 0,
         "name": "اصغر ابراهیمی",
         "imgLink": "lowyer-picture.png",
         "experience": 10,
-
         "ratingScore": 5,
         "reviews": ["he is a good lowyer", "he is the best"],
         "services": ["دعواهای خانوادگی", "اختلافات ارث و میراث", "دعاوی سیاسی"]
@@ -20,6 +20,7 @@
     {
       "type": "Feature",
       "properties": {
+        "id" : 1,
         "name": "ممد ابراهیمی",
         "imgLink": "l2.jpg",
         "experience": 10,
