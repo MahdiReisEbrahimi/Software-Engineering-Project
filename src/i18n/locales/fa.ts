@@ -10,5 +10,13 @@ export default {
   },
   mapPage: {
     findYourNearLoawyer: 'وکیل نزدیکتو پیدا کن'
+  },
+  auth: {
+    login: 'ورود',
+    singup: 'ثبت نام',
+    email: 'ایمیل',
+    password: 'رمز عبور',
+    loginCartMessage: 'با ایمیل و رمز عبور وارد شوید',
+    loading: 'در حال بررسی...',
   }
 } as const

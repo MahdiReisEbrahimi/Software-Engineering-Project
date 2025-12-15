@@ -26,7 +26,7 @@ const allLowyers = ref<LowyerInfoType[]>([])
 
 const markers = L.markerClusterGroup({
   showCoverageOnHover: false,
-  maxClusterRadius: 40,
+  maxClusterRadius: 15,
 })
 
 const map = ref<L.Map>()
