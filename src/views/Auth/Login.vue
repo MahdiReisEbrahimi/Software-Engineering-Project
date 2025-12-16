@@ -83,7 +83,7 @@ const form = reactive<LoginForm>({
 const errors = reactive<Partial<LoginForm>>({})
 const loading = ref(false)
 const showPassword = ref(false)
-
+const userType = ref<'user'|'lowyer'|'admin'>('user')
 function validate(): boolean {
   errors.email = ''
   errors.password = ''
