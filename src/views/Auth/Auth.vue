@@ -4,8 +4,8 @@
     style="background-image: url('/assets/img/background.jpg')"
   >
     <div class="w-5/6 m-auto max-w-md bg-gray-800 p-8 rounded-2xl shadow-lg lg:mr-20">
-      <LoginForm v-if="!showSignup" />
-      <SignupForm v-if="showSignup" />
+      <LoginForm v-if="!showSignup" class="hard-comming-Down-animation" />
+      <SignupForm v-if="showSignup" class="hard-comming-Down-animation" />
       <div class="flex items-center justify-center mt-3">
         <button @click="toggleSignupLogin" class="text-gray-400 text-xs">
           <u v-if="!showSignup">ثبت نام نکرده اید؟</u>

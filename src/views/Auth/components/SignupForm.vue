@@ -3,7 +3,7 @@
     <h2
       class="text-2xl font-bold text-center text-white mb-2 flex justify-center gap-2 items-center"
     >
-      {{ $t('auth.singup') }}
+      {{ $t('auth.signup') }}
       <CaUserAvatarFilledAlt v-if="userType === 'user'" />
       <FaUserTie v-if="userType === 'lowyer'" />
       <MdSharpAdminPanelSettings v-if="userType === 'admin'" />
@@ -12,17 +12,7 @@
       <p class="text-center text-xs text-gray-300">
         {{ $t('auth.loginCartMessage') }}
       </p>
-      <select v-model="userType" class="p-1 rounded-sm bg-gray-300 text-xs">
-        <option value="user" class="">
-          <span class="text-sm">👤</span>
-          کاربر عادی
-        </option>
-        <option value="lowyer" class="text-xs">
-          <span class="text-lg mx-3">⚖ </span>
-          <span> وکیل </span>
-        </option>
-        <option value="admin">🔐 ادمین</option>
-      </select>
+      <ReusableSelect v-model="userType" :options="options" rtl width="w-28" />
     </div>
 
     <el-form
@@ -81,6 +71,18 @@ import { ref, reactive } from 'vue'
 import type { FormInstance, FormItemRule } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 import { FaUserTie, CaUserAvatarFilledAlt, MdSharpAdminPanelSettings } from '@kalimahapps/vue-icons'
+import ReusableSelect from '@/components/reusable/ReusableSelect.vue'
+import type { SelectOption } from '@/components/reusable/ReusableSelect.vue'
+
+////////////////////////
+
+const options: SelectOption[] = [
+  { label: 'کاربر عادی', value: 'user', icon: '👤' },
+  { label: 'وکیل', value: 'lowyer', icon: '⚖️' },
+  { label: 'ادمین', value: 'admin', icon: '🔐' },
+]
+
+////////////////////////
 
 const { t } = useI18n()
 const formRef = ref<FormInstance>()

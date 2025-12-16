@@ -46,7 +46,7 @@ const router = createRouter({
     {
       path: '/Auth',
       name: 'login',
-      component: () => import('@/views/Auth/Login.vue'),
+      component: () => import('@/views/Auth/Auth.vue'),
       meta: {
         icon: 'BsPersonFillAdd',
       },

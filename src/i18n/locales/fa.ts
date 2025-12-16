@@ -13,7 +13,7 @@ export default {
   },
   auth: {
     login: 'ورود',
-    singup: 'ثبت نام',
+    signup: 'ثبت نام',
     reset: 'پاک کردن',
     email: 'ایمیل',
     password: 'رمز عبور',
