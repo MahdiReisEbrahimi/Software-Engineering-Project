@@ -14,6 +14,7 @@ export default {
   auth: {
     login: 'ورود',
     singup: 'ثبت نام',
+    reset: 'پاک کردن',
     email: 'ایمیل',
     password: 'رمز عبور',
     loginCartMessage: 'نقش خود را انتخاب کنید:',

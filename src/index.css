@@ -31,3 +31,11 @@ body {
     margin-top: -5px;
   }
 }
+
+.el-form-item .el-form-item__error {
+  right: 0px;
+  margin-top: 3px;
+  direction: rtl;
+  text-align: right;
+  font-size: smaller;
+}
