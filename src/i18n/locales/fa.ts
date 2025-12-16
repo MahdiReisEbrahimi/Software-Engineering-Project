@@ -16,7 +16,13 @@ export default {
     singup: 'ثبت نام',
     email: 'ایمیل',
     password: 'رمز عبور',
-    loginCartMessage: 'با ایمیل و رمز عبور وارد شوید',
+    loginCartMessage: 'نقش خود را انتخاب کنید:',
     loading: 'در حال بررسی...',
+    errors: {
+      enterValidEmail: "ایمیل معتبر وارد کنید",
+      passRequired: "پسورد باید پر شود",
+      emailRequired: "ایمیل باید پر شود",
+      passLength: 'طول رمز عبور باید حداقل 8 کاراکتر باشد'
+    }
   }
 } as const
