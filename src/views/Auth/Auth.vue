@@ -21,7 +21,7 @@ import { ref } from 'vue'
 import LoginForm from './components/LoginForm.vue'
 import SignupForm from './components/SignupForm.vue'
 
-const showSignup = ref(false)
+const showSignup = ref(true)
 
 function toggleSignupLogin() {
   showSignup.value = !showSignup.value

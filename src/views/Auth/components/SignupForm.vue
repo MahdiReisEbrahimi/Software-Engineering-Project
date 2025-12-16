@@ -15,52 +15,22 @@
       <ReusableSelect v-model="userType" :options="options" rtl width="w-28" />
     </div>
 
-    <el-form
-      ref="formRef"
-      :model="numberValidateForm"
-      label-width="auto"
-      label-position="top"
-      class="space-y-7"
-    >
-      <!-- Email Field -->
-      <el-form-item
-        :label="$t('auth.email')"
-        prop="email"
-        :rules="[{ validator: emailValidator, trigger: 'blur' }]"
-      >
-        <el-input
-          v-model.number="numberValidateForm.email"
-          type="text"
-          autocomplete="off"
-          placeholder="ex@example.com"
-          class="rounded-lg"
-          @keydown.enter.prevent="submitForm(formRef)"
-        />
-      </el-form-item>
+    <el-form ref="formRef" :model="numberValidateForm" label-position="top" class="space-y-7">
+      <UserFields
+        v-model="numberValidateForm"
+        :email-validator="emailValidator"
+        :password-validator="passwordValidator"
+        :confirm-password-validator="confirmPasswordValidator"
+        @enter="submitForm(formRef)"
+      />
 
-      <!-- Password Field -->
-      <el-form-item
-        :label="$t('auth.password')"
-        prop="password"
-        :rules="[{ validator: passwordValidator, trigger: 'blur' }]"
-      >
-        <el-input
-          v-model.number="numberValidateForm.password"
-          type="password"
-          autocomplete="off"
-          placeholder="12345678"
-          class="rounded-lg"
-          show-password
-          @keydown.enter.prevent="submitForm(formRef)"
-        />
-      </el-form-item>
-
-      <!-- Buttons -->
       <div class="flex gap-2">
         <el-button type="primary" @click="submitForm(formRef)">
           {{ $t('auth.login') }}
         </el-button>
-        <el-button @click="resetForm(formRef)"> {{ $t('auth.reset') }} </el-button>
+        <el-button @click="resetForm(formRef)">
+          {{ $t('auth.reset') }}
+        </el-button>
       </div>
     </el-form>
   </div>
@@ -73,16 +43,7 @@ import { useI18n } from 'vue-i18n'
 import { FaUserTie, CaUserAvatarFilledAlt, MdSharpAdminPanelSettings } from '@kalimahapps/vue-icons'
 import ReusableSelect from '@/components/reusable/ReusableSelect.vue'
 import type { SelectOption } from '@/components/reusable/ReusableSelect.vue'
-
-////////////////////////
-
-const options: SelectOption[] = [
-  { label: 'کاربر عادی', value: 'user', icon: '👤' },
-  { label: 'وکیل', value: 'lowyer', icon: '⚖️' },
-  { label: 'ادمین', value: 'admin', icon: '🔐' },
-]
-
-////////////////////////
+import UserFields from './signup/UserFields.vue'
 
 const { t } = useI18n()
 const formRef = ref<FormInstance>()
@@ -90,8 +51,15 @@ const formRef = ref<FormInstance>()
 const numberValidateForm = reactive({
   email: '',
   password: '',
+  confirmPassword: '',
 })
 const userType = ref<'user' | 'lowyer' | 'admin'>('user')
+
+const options: SelectOption[] = [
+  { label: 'کاربر عادی', value: 'user', icon: '👤' },
+  { label: 'وکیل', value: 'lowyer', icon: '⚖️' },
+  { label: 'ادمین', value: 'admin', icon: '🔐' },
+]
 
 const emailValidator: FormItemRule['validator'] = (rule, value, callback) => {
   if (!value) {
@@ -108,6 +76,16 @@ const passwordValidator: FormItemRule['validator'] = (rule, value, callback) => 
     callback(new Error(t('auth.errors.passRequired')))
   } else if (value.toString().length < 8) {
     callback(new Error(t('auth.errors.passLength')))
+  } else {
+    callback()
+  }
+}
+
+const confirmPasswordValidator: FormItemRule['validator'] = (rule, value, callback) => {
+  if (!value) {
+    callback(new Error(t('auth.errors.confirmPassRequired')))
+  } else if (value !== numberValidateForm.password) {
+    callback(new Error(t('auth.errors.passwordsDoesNotMatch')))
   } else {
     callback()
   }
@@ -133,5 +111,9 @@ const resetForm = (formEl: FormInstance | undefined) => {
 <style scoped>
 ::v-deep .el-form .el-form-item__label {
   color: white;
+}
+
+::v-deep .el-input__inner::placeholder {
+  font-size: smaller;
 }
 </style>
