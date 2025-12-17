@@ -20,6 +20,7 @@ export default {
     passwordConfirm: 'تایید رمز عبور',
     loginCartMessage: 'نقش خود را انتخاب کنید:',
     loading: 'در حال بررسی...',
+    next: 'مرحله بعد',
     hints: {
       password: 'باید شامل حداقل 8 کاراکتر باشد',
       passwordConfirm: 'رمز  عبور را تکرار کنید',
