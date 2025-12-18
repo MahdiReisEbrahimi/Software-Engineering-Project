@@ -21,6 +21,10 @@ export default {
     loginCartMessage: 'نقش خود را انتخاب کنید:',
     loading: 'در حال بررسی...',
     next: 'مرحله بعد',
+    identityInfo: 'اطلاعات هویتی',
+    jobInfo: 'اطلاعات شغلی',
+    securityInfo: 'اطلاعات امنیتی',
+    lowyersSingupForm: 'فرم ثبت نام وکلا',
     hints: {
       password: 'باید شامل حداقل 8 کاراکتر باشد',
       passwordConfirm: 'رمز  عبور را تکرار کنید',
