@@ -1,8 +1,17 @@
 <template>
   <div class="flex items-center">
-    <button @click="handleClick" class="rounded-lg p-2 mx-1 mt-1 hover:bg-gray-600 duration-500">
-      <BsChevronLeft v-if="props.direction === 'left'" class="text-3xl text-white" />
-      <BsChevronRight v-if="props.direction === 'right'" class="text-3xl text-white" />
+    <button
+      @click="handleClick"
+      :disabled="props.disabled"
+      :class="
+        props.disabled
+          ? 'text-gray-500 cursor-not-allowed'
+          : 'text-white hover:bg-gray-600 duration-500'
+      "
+      class="rounded-lg p-2 mx-1 mt-1"
+    >
+      <BsChevronLeft v-if="props.direction === 'left'" class="text-3xl" />
+      <BsChevronRight v-if="props.direction === 'right'" class="text-3xl" />
     </button>
   </div>
 </template>
@@ -12,6 +21,9 @@ const props = defineProps({
   direction: {
     required: true,
     type: String,
+  },
+  disabled: {
+    type: Boolean,
   },
 })
 
