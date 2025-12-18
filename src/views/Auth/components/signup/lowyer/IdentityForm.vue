@@ -6,22 +6,19 @@
     :rules="rules"
     label-width="auto"
     label-position="top"
+    dir="rtl"
   >
-    <el-form-item label="Activity name" prop="name">
+    <el-form-item :label="$t('auth.name')" prop="name">
       <el-input v-model="ruleForm.name" />
     </el-form-item>
-    <el-form-item label="Activity zone" prop="region">
-      <el-select v-model="ruleForm.region" placeholder="Activity zone">
-        <el-option label="Zone one" value="shanghai" />
-        <el-option label="Zone two" value="beijing" />
-      </el-select>
+    <el-form-item :label="$t('auth.fatherName')" prop="name">
+      <el-input v-model="ruleForm.name" />
+    </el-form-item>
+    <el-form-item :label="$t('auth.fatherName')" prop="name">
+      <el-input type="number" v-model="ruleForm.name" />
     </el-form-item>
     <el-form-item label="Activity count" prop="count">
-      <el-select-v2
-        v-model="ruleForm.count"
-        placeholder="Activity count"
-        :options="options"
-      />
+      <el-select-v2 v-model="ruleForm.count" placeholder="Activity count" :options="options" />
     </el-form-item>
     <el-form-item label="Activity time" required>
       <el-col :span="11">
@@ -57,18 +54,10 @@
     </el-form-item>
     <el-form-item label="Activity type" prop="type">
       <el-checkbox-group v-model="ruleForm.type">
-        <el-checkbox value="Online activities" name="type">
-          Online activities
-        </el-checkbox>
-        <el-checkbox value="Promotion activities" name="type">
-          Promotion activities
-        </el-checkbox>
-        <el-checkbox value="Offline activities" name="type">
-          Offline activities
-        </el-checkbox>
-        <el-checkbox value="Simple brand exposure" name="type">
-          Simple brand exposure
-        </el-checkbox>
+        <el-checkbox value="Online activities" name="type"> Online activities </el-checkbox>
+        <el-checkbox value="Promotion activities" name="type"> Promotion activities </el-checkbox>
+        <el-checkbox value="Offline activities" name="type"> Offline activities </el-checkbox>
+        <el-checkbox value="Simple brand exposure" name="type"> Simple brand exposure </el-checkbox>
       </el-checkbox-group>
     </el-form-item>
     <el-form-item label="Resources" prop="resource">
@@ -81,9 +70,7 @@
       <el-input v-model="ruleForm.desc" type="textarea" />
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm(ruleFormRef)">
-        Create
-      </el-button>
+      <el-button type="primary" @click="submitForm(ruleFormRef)"> Create </el-button>
       <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
     </el-form-item>
   </el-form>
@@ -180,9 +167,7 @@ const rules = reactive<FormRules<RuleForm>>({
       trigger: 'change',
     },
   ],
-  desc: [
-    { required: true, message: 'Please input activity form', trigger: 'blur' },
-  ],
+  desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
 })
 
 const submitForm = async (formEl: FormInstance | undefined) => {
@@ -207,5 +192,4 @@ const options = Array.from({ length: 10000 }).map((_, idx) => ({
 }))
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
