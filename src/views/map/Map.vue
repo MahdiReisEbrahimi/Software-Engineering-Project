@@ -3,7 +3,15 @@
     <h1 class="font-bold">{{ $t('mapPage.findYourNearLoawyer') }}</h1>
     <BxSearchAlt class="text-xl mr-2" />
   </div>
-  <div id="map" class="h-1/2 m-2"></div>
+  <div id="map" class="relative h-1/2 m-2">
+    <button
+      class="absolute z-10 top-20 left-3.5 border-1 border-black cursor-pointer bg-white p-1 text-xl"
+      @click="locateMe"
+    >
+      <BxCurrentLocation />
+    </button>
+  </div>
+
   <div v-if="showDetails" class="flex py-4 mx-2 w-90vw justify-between">
     <NextLastBtn direction="right" @click="(direction) => nextLastBtnHandler(direction)" />
     <LowyerDetails :lowyerInfo="focusedLowyer!" />
@@ -15,14 +23,49 @@
 import { onMounted, ref } from 'vue'
 import L from 'leaflet'
 import 'leaflet.markercluster'
-import { BxSearchAlt } from '@kalimahapps/vue-icons'
+import { BxSearchAlt, BxCurrentLocation } from '@kalimahapps/vue-icons'
 import LowyerDetails from './components/LowyerDetails.vue'
 import NextLastBtn from '@/components/reusable/NextLastBtn.vue'
-import type { LowyerInfoType } from '@/Types/User'
+import type { LowyerInfoType } from '@/Types/User.ts'
 
 const showDetails = ref(false)
 const focusedLowyer = ref<LowyerInfoType>()
 const allLowyers = ref<LowyerInfoType[]>([])
+const userLocation = ref<[number, number] | null>(null)
+
+function locateMe() {
+  if (!navigator.geolocation) {
+    alert('مرورگر شما از موقعیت مکانی پشتیبانی نمی‌کند')
+    return
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const lat = position.coords.latitude
+      const lng = position.coords.longitude
+
+      userLocation.value = [lat, lng]
+
+      map.value?.flyTo([lat, lng], 14)
+
+      L.circleMarker([lat, lng], {
+        radius: 8,
+        color: '#2563eb',
+        fillColor: '#3b82f6',
+        fillOpacity: 0.9,
+      })
+        .addTo(map.value!)
+        .bindPopup('موقعیت شما')
+        .openPopup()
+    },
+    () => {
+      alert('دسترسی به موقعیت مکانی داده نشد')
+    },
+    {
+      enableHighAccuracy: true,
+    },
+  )
+}
 
 const markers = L.markerClusterGroup({
   showCoverageOnHover: false,
@@ -53,8 +96,8 @@ onMounted(() => {
 
           const lowyerImg = L.icon({
             iconUrl: `/assets/img/${imgLink}`,
-            iconSize: [40, 40],
-            iconAnchor: [20, 20],
+            iconSize: [46, 46],
+            iconAnchor: [23, 23],
             className: 'markerrrr',
           })
           const marker = L.marker(latlng, { icon: lowyerImg })
