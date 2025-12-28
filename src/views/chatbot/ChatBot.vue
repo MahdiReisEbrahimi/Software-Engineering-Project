@@ -1,17 +1,16 @@
 <template>
-  <div
-    class="w-full h-full bg-gray-800 mx-auto shadow-lg flex flex-col p-4 text-white"
-  >
-    <header class="flex items-center gap-3 border-b border-gray-700 pb-3">
-      <CgMenuLeftAlt class="text-2xl opacity-70 hover:opacity-100 cursor-pointer" />
-      <h2 class="font-bold text-xl tracking-wide">Lawyers Chatbot</h2>
-      <HeFilledArtificialIntelligence class="text-2xl ml-auto opacity-80" />
+  <div class="w-full h-full bg-gray-800 mx-auto shadow-lg flex flex-col p-4 text-white">
+    <header class="flex items-center justify-between gap-3 border-b border-gray-700 pb-5">
+      <div class="flex">
+        <h2 class="font-bold text-xl tracking-wide">چت بات هوش مصنوعی</h2>
+        <HeFilledArtificialIntelligence class="text-2xl ml-auto opacity-80" />
+      </div>
+      <div>
+        <CgMenuLeftAlt class="text-2xl opacity-70 hover:opacity-100 cursor-pointer" />
+      </div>
     </header>
 
-    <main
-      ref="scrollBox"
-      class="flex-1 overflow-auto mt-4 mb-3 pr-2 space-y-4 min-h-0"
-    >
+    <main ref="scrollBox" class="flex-1 overflow-auto mt-4 mb-3 pr-2 space-y-4 min-h-0">
       <div
         v-for="(message, index) in messages"
         :key="index"
@@ -20,11 +19,7 @@
       >
         <div
           class="max-w-[80%] px-4 py-3 rounded-2xl shadow-md"
-          :class="
-            index % 2 === 0
-              ? 'bg-gray-700 text-gray-100'
-              : 'bg-blue-500 text-white'
-          "
+          :class="index % 2 === 0 ? 'bg-gray-700 text-gray-100' : 'bg-blue-500 text-white'"
         >
           {{ message }}
         </div>
@@ -33,7 +28,7 @@
 
     <!-- Tools -->
     <footer class="mt-2">
-      <Tools @newMessage="newMessageHandle" />
+      <Tools @newMessage="newMessageHandle" :submitDisabler="submitDisabler" />
     </footer>
   </div>
 </template>
@@ -44,7 +39,7 @@ import Tools from './components/Tools.vue'
 import { ref, nextTick } from 'vue'
 
 const messages = ref(['Hello, how can i help you?'])
-
+const submitDisabler = ref(false)
 const scrollBox = ref<HTMLElement | null>(null)
 
 function scrollToBottom() {
@@ -55,8 +50,11 @@ function scrollToBottom() {
 
 function newMessageHandle(payload: { message: string }) {
   messages.value.push(payload.message)
-  messages.value.push('Waiting for server Response')
-
+  submitDisabler.value = true
+  setTimeout(() => {
+    messages.value.push('Waiting for server Response')
+    submitDisabler.value = false
+  }, 6000)
   scrollToBottom()
 }
 </script>
