@@ -1,0 +1,69 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id" : 0,
+        "name": "اصغر ابراهیمی",
+        "imgLink": "lowyer-picture.png",
+        "experience": 10,
+        "ratingScore": 5,
+        "reviews": ["he is a good lowyer", "he is the best"],
+        "services": ["دعواهای خانوادگی", "اختلافات ارث و میراث", "دعاوی سیاسی"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [51.471318, 35.670138]
+      }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "id" : 0,
+        "name": "محسن ابراهیمی",
+        "imgLink": "l1.jpg",
+        "experience": 10,
+        "ratingScore": 5,
+        "reviews": ["he is a good lowyer", "he is the best"],
+        "services": ["دعواهای خانوادگی", "اختلافات ارث و میراث", "دعاوی سیاسی"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [52.471318, 36.670138]
+      }
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "id" : 0,
+        "name": "محمد ابراهیمی",
+        "imgLink": "l3.jpg",
+        "experience": 10,
+        "ratingScore": 5,
+        "reviews": ["he is a good lowyer", "he is the best"],
+        "services": ["دعواهای خانوادگی", "اختلافات ارث و میراث", "دعاوی سیاسی"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [50.471318, 34.670138]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id" : 1,
+        "name": "ممد ابراهیمی",
+        "imgLink": "l2.jpg",
+        "experience": 10,
+        "ratingScore": 5,
+        "reviews": ["he is a good lowyer", "he is the best"],
+        "services": ["دعواهای خانوادگی", "اختلافات ارث و میراث", "دعاوی سیاسی"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [50, 34]
+      }
+    }
+  ]
+}

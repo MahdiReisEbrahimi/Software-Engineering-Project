@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+
+body {
+  background-color: rgb(48, 48, 48);
+  font-family: 'Vazirmatn', sans-serif !important;
+}
+
+.leaflet-container,
+.leaflet-pane,
+.leaflet-map-pane,
+.leaflet-tile-pane,
+.leaflet-overlay-pane,
+.leaflet-shadow-pane,
+.leaflet-marker-pane,
+.leaflet-tooltip-pane,
+.leaflet-popup-pane {
+  z-index: 1 !important;
+}
+
+.slow-comming-Down-animation {
+  animation-name: slowCommingDown;
+  animation: slowCommingDown 0.5s ease-out 0s 1 normal;
+}
+
+@keyframes slowCommingDown {
+  0% {
+    margin-top: -5px;
+  }
+}
+
+.el-form-item .el-form-item__error {
+  right: 0px;
+  margin-top: 3px;
+  direction: rtl;
+  text-align: right;
+  font-size: smaller;
+}
+
+
+.hard-comming-Down-animation {
+  animation-name: hardCommingDown;
+  animation: hardCommingDown 0.5s ease-in 0s 1 normal;
+}
+
+@keyframes hardCommingDown {
+  0% {
+    margin-top: -20px;
+  }
+}
