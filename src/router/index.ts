@@ -59,6 +59,14 @@ const router = createRouter({
         icon: 'CoBrandAboutMe',
       },
     },
+        {
+      path: '/payment',
+      name: 'payment',
+      component: () => import('@/views/payment/Payment.vue'),
+      meta: {
+        showInNav: false,
+      },
+    },
   ],
 })
 
