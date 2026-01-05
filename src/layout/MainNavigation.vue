@@ -17,7 +17,10 @@ import {
 const isOpen = ref(false)
 
 const router = useRouter()
-const allRoutes = router.getRoutes()
+const allRoutes = router
+.getRoutes()
+.filter(route => route.meta?.icon && route.meta?.showInNav !== false)
+
 
 const toggleMenu = () => {
   isOpen.value = !isOpen.value

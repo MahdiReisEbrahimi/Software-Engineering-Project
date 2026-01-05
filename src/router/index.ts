@@ -36,6 +36,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/weblog/:id',
+      name: 'blogDetail',
+      component: () => import('@/views/weblog/BlogDetail.vue'),
+      meta: {
+      showInNav: false, 
+  },
+},
+    {
       path: '/profile',
       name: 'profile',
       component: () => import('@/views/profile/Profile.vue'),
