@@ -21,7 +21,7 @@ const allRoutes = router
   .getRoutes()
 
   // added showInNav filter
-  .filter(route => route.meta?.icon && route.meta?.showInNav !== falsef)
+  .filter(route => route.meta?.icon && route.meta?.showInNav !== false)
 
 const toggleMenu = () => {
   isOpen.value = !isOpen.value
