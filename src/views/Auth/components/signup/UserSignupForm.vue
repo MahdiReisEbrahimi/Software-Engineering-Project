@@ -71,8 +71,7 @@
 import { ref, reactive } from 'vue'
 import type { FormInstance, FormItemRule } from 'element-plus'
 import { useI18n } from 'vue-i18n'
-
-const emit = defineEmits(['lowyerSingupClick'])
+import { useAuthStore } from '@/stores/auth'
 
 const { t } = useI18n()
 const formRef = ref<FormInstance>()
@@ -136,7 +135,9 @@ const resetForm = (formEl: FormInstance | undefined) => {
 }
 
 function openLowyerSignupForm() {
-  emit('lowyerSingupClick')
+  const authStore = useAuthStore()
+  const { changeAuthPage } = authStore
+  changeAuthPage('lowyerSignup')
 }
 </script>
 

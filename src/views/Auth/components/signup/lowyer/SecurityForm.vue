@@ -29,11 +29,15 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
+import { useAuthStore } from '@/stores/auth'
 
 interface RuleForm {
-  password: string
+password  : string
   acceptPassword: string
 }
+
+const authStore = useAuthStore()
+const { setLowyerSignupSecurityInfo } = authStore
 
 const ruleFormRef = ref<FormInstance>()
 
@@ -86,13 +90,7 @@ const submitForm = async (formEl?: FormInstance) => {
   await formEl.validate(async (valid) => {
     if (!valid) return
 
-    const payload = {
-      password: ruleForm.password,
-    }
-
-    console.log('SUBMIT PAYLOAD:', payload)
-
-    // await api.post('/auth/set-password', payload)
+    setLowyerSignupSecurityInfo(ruleForm.password)
   })
 }
 

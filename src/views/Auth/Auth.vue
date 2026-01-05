@@ -4,17 +4,16 @@
     style="background-image: url('/assets/img/background.jpg')"
   >
     <div class="w-5/6 m-auto mt-10 max-w-md bg-gray-800 p-8 rounded-2xl shadow-lg lg:mr-20">
-      <LoginForm v-show="!showSignup && !showLowyerSignupForm" class="hard-comming-Down-animation" />
+      <LoginForm v-if="currentForm === 'login'" class="hard-comming-Down-animation" />
       <SignupForm
-        v-show="showSignup && !showLowyerSignupForm"
-        @lowyerSingupClick="lowyerSingupClickHandle"
+        v-if="currentForm === 'userSignup'"
         class="hard-comming-Down-animation"
       />
-      <LowyerSignupPage v-show="showLowyerSignupForm" class="hard-comming-Down-animation" />
+      <LowyerSignupPage v-if="currentForm === 'lowyerSignup'" class="hard-comming-Down-animation" />
       <div class="flex items-center justify-center mt-3">
         <button @click="toggleSignupLogin" class="text-gray-400 text-xs">
-          <u v-if="!showSignup">ثبت نام نکرده اید؟</u>
-          <u v-if="showSignup">از قبل ثبت نام کرده‌اید؟</u>
+          <u v-if="currentForm === 'login'">ثبت نام نکرده اید؟</u>
+          <u v-if="currentForm !== 'login'">از قبل ثبت نام کرده‌اید؟</u>
         </button>
       </div>
     </div>
@@ -22,19 +21,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import LoginForm from './components/LoginForm.vue'
 import SignupForm from './components/signup/UserSignupForm.vue'
 import LowyerSignupPage from './components/signup/lowyer/LowyerSignupPage.vue'
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
 
-const showSignup = ref(true)
-const showLowyerSignupForm = ref(true)
-
-function lowyerSingupClickHandle() {
-  showLowyerSignupForm.value = true
-}
+const authStore = useAuthStore()
+const { currentForm } = storeToRefs(authStore)
+const { changeAuthPage } = authStore
 
 function toggleSignupLogin() {
-  showSignup.value = showSignup.value === true ? false : true
+  if(currentForm.value === 'login') changeAuthPage('userSignup')
+  else changeAuthPage('login')
 }
 </script>

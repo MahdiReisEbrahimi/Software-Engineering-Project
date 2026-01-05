@@ -12,7 +12,7 @@
       <el-input v-model.number="jobForm.experience" type="number" min="0" />
     </el-form-item>
 
-    <el-form-item :label="$t('auth.profileImage')" prop="img">
+    <el-form-item :label="$t('auth.profileImage')" prop="profileImage">
       <el-upload
         class="avatar-uploader"
         action=""
@@ -43,7 +43,7 @@
     </el-form-item>
 
     <el-form-item>
-      <el-button type="primary" @click="submitForm(jobFormRef)">
+      <el-button type="primary" @click="openNextForm(jobFormRef)">
         {{ $t('auth.next') }}
       </el-button>
       <el-button @click="resetForm(jobFormRef)">
@@ -62,20 +62,16 @@ import type {
   UploadUserFile,
 } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
+import { useAuthStore } from '@/stores/auth'
+import type { JobRuleForm } from '@/Types/User'
 
-interface JobForm {
-  id?: string
-  name: string
-  experience: number
-  img: File | null
-  services: string[]
-  coordinates: [number, number]
-}
+
+const authStore = useAuthStore()
+const { changeLowyerSignupForm, setLowyerSignupJobInfo } = authStore
 
 const jobFormRef = ref<FormInstance>()
 
-const jobForm = reactive<JobForm>({
-  name: '',
+const jobForm = reactive<JobRuleForm>({
   experience: 0,
   img: null,
   services: [],
@@ -84,11 +80,7 @@ const jobForm = reactive<JobForm>({
 
 const fileList = ref<UploadUserFile[]>([])
 
-const rules = reactive<FormRules<JobForm>>({
-  name: [
-    { required: true, message: 'عنوان شغلی الزامی است', trigger: 'blur' },
-    { min: 3, message: 'حداقل ۳ کاراکتر', trigger: 'blur' },
-  ],
+const rules = reactive<FormRules<JobRuleForm>>({
   experience: [
     { required: true, message: 'سابقه کاری الزامی است', trigger: 'blur' },
     { type: 'number', min: 0, message: 'عدد معتبر وارد کنید', trigger: 'blur' },
@@ -121,11 +113,12 @@ const onRemove = () => {
   jobForm.img = null
 }
 
-const submitForm = async (formEl?: FormInstance) => {
+const openNextForm = async (formEl?: FormInstance) => {
   if (!formEl) return
   await formEl.validate((valid) => {
     if (valid) {
-      console.log('JOB FORM:', jobForm)
+      setLowyerSignupJobInfo(jobForm)
+      changeLowyerSignupForm('security')
     }
   })
 }

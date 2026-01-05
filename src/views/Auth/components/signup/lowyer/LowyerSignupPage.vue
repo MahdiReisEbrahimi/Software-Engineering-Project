@@ -26,16 +26,19 @@
 <script setup lang="ts">
 import NextLastBtn from '@/components/reusable/NextLastBtn.vue'
 import ReusableButton from '@/components/reusable/ReusableButton.vue'
-import { computed, ref, type Component } from 'vue'
+import { computed, type Component } from 'vue'
 import IdentityForm from './IdentityForm.vue'
 import JobForm from './JobForm.vue'
 import SecurityForm from './SecurityForm.vue'
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
 
 // ===========types=============
 type FormKeys = 'IdentityForm' | 'JobForm' | 'SecurityForm'
-
+const authStore = useAuthStore()
+const { currentLowyerSignupForm : formType } = storeToRefs(authStore)
+const { changeLowyerSignupForm } = authStore
 // ===========data=============
-const formType = ref<'identity' | 'job' | 'security'>('identity')
 const components = {
   IdentityForm,
   JobForm,
@@ -52,11 +55,11 @@ const activeComponent = computed<Component>(() => {
 // ===========methods=============
 function nextLastBtnHandle(direction: string) {
   if (direction === 'right') {
-    if (formType.value === 'job') formType.value = 'identity'
-    else if (formType.value === 'security') formType.value = 'job'
+    if (formType.value === 'job') changeLowyerSignupForm('identity')
+    else if (formType.value === 'security') changeLowyerSignupForm('job')
   } else {
-    if (formType.value === 'job') formType.value = 'security'
-    else if (formType.value === 'identity') formType.value = 'job'
+    if (formType.value === 'job') changeLowyerSignupForm('security')
+    else if (formType.value === 'identity') changeLowyerSignupForm('job')
   }
 }
 // ===========computed=============
