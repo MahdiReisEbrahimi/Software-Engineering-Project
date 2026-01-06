@@ -1,3 +1,4 @@
+import { icon } from 'leaflet'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -27,22 +28,38 @@ const router = createRouter({
         icon: 'HeOutlineCityWorker',
       },
     },
-    {
-      path: '/weblog',
-      name: 'weblog',
-      component: () => import('@/views/weblog/Weblog.vue'),
-      meta: {
-        icon: 'MiSolidArticle',
-      },
+  {
+      path: '/blog',
+      name: 'blog-list',
+      component: () => import('@/views/blog/BlogListView.vue'),
+      meta: { title: 'وبلاگ حقوقی', icon:'MiSolidArticle'}
     },
     {
-      path: '/weblog/:id',
-      name: 'blogDetail',
-      component: () => import('@/views/weblog/BlogDetail.vue'),
+      path: '/blog/:slug',
+      name: 'blog-post',
+      component: () => import('@/views/blog/BlogPostView.vue'),
+      meta: { title: 'مقاله' }
+    },
+    {
+      path: '/blog/manage',
+      name: 'blog-manage',
+      component: () => import('@/views/blog/BlogManageView.vue'),
       meta: {
-      showInNav: false, 
-  },
-},
+        title: 'مدیریت مقالات',
+        requiresAuth: true,
+        roles: ['admin', 'lawyer']
+      }
+    },
+    {
+      path: '/blog/edit/:id',
+      name: 'blog-edit',
+      component: () => import('@/views/blog/BlogManageView.vue'),
+      meta: {
+        title: 'ویرایش مقاله',
+        requiresAuth: true,
+        roles: ['admin', 'lawyer']
+      }
+    },
     {
       path: '/profile',
       name: 'profile',
@@ -70,4 +87,24 @@ const router = createRouter({
   ],
 })
 
+
+// Navigation Guard برای بررسی دسترسی
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    next({ name: 'login', query: { redirect: to.fullPath } })
+    return
+  }
+
+  if (to.meta.roles) {
+    const userRole = authStore.user?.role
+    if (!userRole || !to.meta.roles.includes(userRole)) {
+      next({ name: 'forbidden' })
+      return
+    }
+  }
+
+  next()
+})
 export default router
