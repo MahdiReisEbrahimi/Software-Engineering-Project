@@ -1,24 +1,20 @@
 <template>
   <article
     @click="$emit('click', post)"
-    class="blog-post-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer h-full flex flex-col"
+    class="weblog-post-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer h-full flex flex-col"
   >
-    <!-- تصویر -->
     <div class="relative h-48 overflow-hidden">
       <img
-        :src="post.featuredImage || '/images/blog-default.jpg'"
+        :src="post.featuredImage || '/images/weblog-default.jpg'"
         :alt="post.title"
         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
       />
-      <!-- دسته‌بندی -->
       <span class="absolute top-4 right-4 px-3 py-1 bg-blue-600 text-white text-sm rounded-full">
         {{ categoryName }}
       </span>
     </div>
 
-    <!-- محتوا -->
     <div class="p-6 flex-grow flex flex-col">
-      <!-- تاریخ و بازدید -->
       <div class="flex items-center text-sm text-gray-500 mb-3">
         <span class="ml-3">{{ formatDate(post.publishedAt) }}</span>
         <span class="flex items-center">
@@ -30,17 +26,14 @@
         </span>
       </div>
 
-      <!-- عنوان -->
       <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
         {{ post.title }}
       </h3>
 
-      <!-- خلاصه -->
       <p class="text-gray-600 mb-4 line-clamp-3 flex-grow">
         {{ post.excerpt }}
       </p>
 
-      <!-- دکمه مطالعه -->
       <button
         class="text-blue-600 hover:text-blue-800 font-medium flex items-center transition-colors mt-auto"
         @click.stop="$emit('read-more', post)"
@@ -56,22 +49,22 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits, computed } from 'vue'
-import { useBlogStore } from '@/stores/blogStore'
-import type { BlogPost } from '@/types/blog'
+import { useWeblogStore } from '@/stores/weblogStore'
+import type { WeblogPost } from '@/types/weblog'
 
 const props = defineProps<{
-  post: BlogPost
+  post: WeblogPost
 }>()
 
 defineEmits<{
-  click: [post: BlogPost]
-  'read-more': [post: BlogPost]
+  click: [post: WeblogPost]
+  'read-more': [post: WeblogPost]
 }>()
 
-const blogStore = useBlogStore()
+const weblogStore = useWeblogStore()
 
 const categoryName = computed(() => {
-  const category = blogStore.categories.find(c => c.id === props.post.categoryId)
+  const category = weblogStore.categories.find(c => c.id === props.post.categoryId)
   return category?.name || 'حقوقی'
 })
 
@@ -81,7 +74,7 @@ const formatDate = (dateString: string) => {
 </script>
 
 <style scoped>
-.blog-post-card {
+.weblog-post-card {
   height: 100%;
 }
 

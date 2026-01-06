@@ -23,27 +23,27 @@ const router = createRouter({
     {
       path: '/lowyers',
       name: 'lowyers',
-      component: import('@/views/lowyers/Lowyers.vue'),
+      component: () => import('@/views/lowyers/Lowyers.vue'),
       meta: {
         icon: 'HeOutlineCityWorker',
       },
     },
-  {
-      path: '/blog',
-      name: 'blog-list',
-      component: () => import('@/views/blog/BlogListView.vue'),
+    {
+      path: '/weblog',
+      name: 'weblog-list',
+      component: () => import('@/views/weblog/WeblogListView.vue'),
       meta: { title: 'وبلاگ حقوقی', icon:'MiSolidArticle'}
     },
     {
-      path: '/blog/:slug',
-      name: 'blog-post',
-      component: () => import('@/views/blog/BlogPostView.vue'),
+      path: '/weblog/:slug',
+      name: 'weblog-post',
+      component: () => import('@/views/weblog/WeblogPostView.vue'),
       meta: { title: 'مقاله' }
     },
     {
-      path: '/blog/manage',
-      name: 'blog-manage',
-      component: () => import('@/views/blog/BlogManageView.vue'),
+      path: '/weblog/manage',
+      name: 'weblog-manage',
+      component: () => import('@/views/weblog/WeblogManageView.vue'),
       meta: {
         title: 'مدیریت مقالات',
         requiresAuth: true,
@@ -51,9 +51,9 @@ const router = createRouter({
       }
     },
     {
-      path: '/blog/edit/:id',
-      name: 'blog-edit',
-      component: () => import('@/views/blog/BlogManageView.vue'),
+      path: '/weblog/edit/:id',
+      name: 'weblog-edit',
+      component: () => import('@/views/weblog/WeblogManageView.vue'),
       meta: {
         title: 'ویرایش مقاله',
         requiresAuth: true,
@@ -88,23 +88,24 @@ const router = createRouter({
 })
 
 
-// Navigation Guard برای بررسی دسترسی
-router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore()
+// // Navigation Guard برای بررسی دسترسی
+// router.beforeEach((to, from, next) => {
+//   const authStore = useAuthStore()
 
-  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    next({ name: 'login', query: { redirect: to.fullPath } })
-    return
-  }
+//   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+//     next({ name: 'login', query: { redirect: to.fullPath } })
+//     return
+//   }
 
-  if (to.meta.roles) {
-    const userRole = authStore.user?.role
-    if (!userRole || !to.meta.roles.includes(userRole)) {
-      next({ name: 'forbidden' })
-      return
-    }
-  }
+//   if (to.meta.roles) {
+//     const userRole = authStore.user?.role
+//     if (!userRole || !to.meta.roles.includes(userRole)) {
+//       next({ name: 'forbidden' })
+//       return
+//     }
+//   }
 
-  next()
-})
+//   next()
+// })
+
 export default router

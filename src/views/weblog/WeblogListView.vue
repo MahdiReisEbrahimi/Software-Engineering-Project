@@ -1,9 +1,8 @@
 <template>
-  <div class="blog-list-view container mx-auto px-4 py-8">
+  <div class="weblog-list-view container mx-auto px-4 py-8">
     <div class="flex flex-col lg:flex-row gap-8">
-      <!-- سایدبار با دسته‌بندی‌ها -->
       <aside class="lg:w-1/4">
-        <BlogCategories
+        <WeblogCategories
           :categories="categories"
           :selectedCategoryId="selectedCategoryId"
           :totalPosts="filteredPosts.length"
@@ -14,9 +13,7 @@
         />
       </aside>
 
-      <!-- محتوای اصلی -->
       <main class="lg:w-3/4">
-        <!-- هدر -->
         <div class="text-center mb-12">
           <h1 class="text-4xl font-bold text-gray-900 mb-4">وبلاگ حقوقی</h1>
           <p class="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -24,7 +21,6 @@
           </p>
         </div>
 
-        <!-- فیلترها و جستجو -->
         <div class="mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
           <div class="flex-1 max-w-md">
             <div class="relative">
@@ -55,13 +51,11 @@
           </div>
         </div>
 
-        <!-- وضعیت لودینگ -->
         <div v-if="loading" class="text-center py-12">
           <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           <p class="mt-4 text-gray-600">در حال دریافت مقالات...</p>
         </div>
 
-        <!-- خطا -->
         <div v-else-if="error" class="text-center py-12">
           <div class="text-red-600">
             <p class="text-xl">خطا در دریافت مقالات</p>
@@ -69,16 +63,13 @@
           </div>
         </div>
 
-        <!-- لیست مقالات -->
         <div v-else>
-          <!-- حالت خالی -->
           <div v-if="filteredPosts.length === 0" class="text-center py-12">
             <p class="text-gray-500 text-lg">مقاله‌ای یافت نشد.</p>
           </div>
 
-          <!-- نمایش مقالات -->
           <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <BlogPostCard
+            <WeblogPostCard
               v-for="post in paginatedPosts"
               :key="post.id"
               :post="post"
@@ -86,7 +77,6 @@
             />
           </div>
 
-          <!-- صفحه‌بندی -->
           <div v-if="totalPages > 1" class="mt-12 flex justify-center items-center gap-2">
             <button
               v-for="page in totalPages"
@@ -111,13 +101,13 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { useBlogStore } from '@/stores/blogStore'
+import { useWeblogStore } from '@/stores/weblogStore'
 import { useAuthStore } from '@/stores/authStore'
-import BlogPostCard from '@/components/reusable/blog/BlogPostCard.vue'
-import BlogCategories from '@/components/reusable/blog/BlogCategories.vue'
+import WeblogPostCard from '@/components/reusable/weblog/WeblogPostCard.vue'
+import WeblogCategories from '@/components/reusable/weblog/WeblogCategories.vue'
 
 const router = useRouter()
-const blogStore = useBlogStore()
+const weblogStore = useWeblogStore()
 const authStore = useAuthStore()
 
 const searchQuery = ref('')
@@ -125,18 +115,17 @@ const selectedCategoryId = ref<number | null>(null)
 const currentPage = ref(1)
 const postsPerPage = 9
 
-// محاسبه‌های reactive
 const isAdminOrLawyer = computed(() => {
   const user = authStore.user
   return user && (user.role === 'admin' || user.role === 'lawyer')
 })
 
-const categories = computed(() => blogStore.categories)
-const loading = computed(() => blogStore.loading)
-const error = computed(() => blogStore.error)
+const categories = computed(() => weblogStore.categories)
+const loading = computed(() => weblogStore.loading)
+const error = computed(() => weblogStore.error)
 
 const filteredPosts = computed(() => {
-  let posts = blogStore.posts.filter(post => post.isPublished)
+  let posts = weblogStore.posts.filter(post => post.isPublished)
 
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
@@ -164,40 +153,34 @@ const totalPages = computed(() => {
   return Math.ceil(filteredPosts.value.length / postsPerPage)
 })
 
-// توابع
 const viewPost = (post: any) => {
-  router.push({ name: 'blog-post', params: { slug: post.slug } })
+  router.push({ name: 'weblog-post', params: { slug: post.slug } })
 }
 
 const goToManage = () => {
-  router.push({ name: 'blog-manage' })
+  router.push({ name: 'weblog-manage' })
 }
 
 const handleCategorySelected = (categoryId: number | null) => {
   currentPage.value = 1
-  // می‌توانید عملیات اضافی انجام دهید
 }
 
 const handleCategoryCreated = (category: any) => {
-  // اضافه کردن دسته‌بندی جدید به لیست
-  // در واقعیت، این باید از طریق store انجام شود
   categories.value.push(category)
 }
 
-// lifecycle
 onMounted(() => {
-  blogStore.fetchPosts({ published_only: true })
-  blogStore.fetchCategories()
+  weblogStore.fetchPosts({ published_only: true })
+  weblogStore.fetchCategories()
 })
 
-// واکنش به تغییر فیلترها
 watch([searchQuery, selectedCategoryId], () => {
   currentPage.value = 1
 })
 </script>
 
 <style scoped>
-.blog-list-view {
+.weblog-list-view {
   min-height: 70vh;
 }
 </style>

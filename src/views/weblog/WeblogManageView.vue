@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-manage-view container mx-auto px-4 py-8">
+  <div class="weblog-manage-view container mx-auto px-4 py-8">
     <!-- هدر -->
     <div class="flex justify-between items-center mb-8">
       <h1 class="text-3xl font-bold text-gray-900">مدیریت مقالات</h1>
@@ -15,14 +15,14 @@
     </div>
 
     <!-- فرم ایجاد مقاله -->
-    <BlogPostForm
+    <WeblogPostForm
       v-if="showCreateForm"
       @submit="handleCreatePost"
       @cancel="showCreateForm = false"
     />
 
     <!-- فرم ویرایش -->
-    <BlogPostForm
+    <WeblogPostForm
       v-if="editingPost"
       :post="editingPost"
       @submit="handleUpdatePost"
@@ -125,23 +125,23 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useBlogStore } from '@/stores/blogStore'
-import BlogPostForm from '@/components/reusable/blog/BlogPostForm.vue'
-import type { BlogPost } from '@/types/blog'
+import { useWeblogStore } from '@/stores/weblogStore'
+import WeblogPostForm from '@/components/reusable/weblog/WeblogPostForm.vue'
+import type { WeblogPost } from '@/types/weblog'
 
 const router = useRouter()
-const blogStore = useBlogStore()
+const weblogStore = useWeblogStore()
 
 const showCreateForm = ref(false)
-const editingPost = ref<BlogPost | null>(null)
-const myPosts = ref<BlogPost[]>([])
+const editingPost = ref<WeblogPost | null>(null)
+const myPosts = ref<WeblogPost[]>([])
 const loading = ref(false)
 
 // توابع
 const loadMyPosts = async () => {
   loading.value = true
   try {
-    const posts = await blogStore.fetchMyPosts()
+    const posts = await weblogStore.fetchMyPosts()
     myPosts.value = posts
   } catch (err) {
     console.error('Error loading posts:', err)
@@ -150,9 +150,9 @@ const loadMyPosts = async () => {
   }
 }
 
-const handleCreatePost = async (postData: Partial<BlogPost>) => {
+const handleCreatePost = async (postData: Partial<WeblogPost>) => {
   try {
-    await blogStore.createPost(postData as any)
+    await weblogStore.createPost(postData as any)
     showCreateForm.value = false
     await loadMyPosts()
   } catch (err) {
@@ -160,11 +160,11 @@ const handleCreatePost = async (postData: Partial<BlogPost>) => {
   }
 }
 
-const handleUpdatePost = async (postData: Partial<BlogPost>) => {
+const handleUpdatePost = async (postData: Partial<WeblogPost>) => {
   if (!editingPost.value) return
 
   try {
-    await blogStore.updatePost(editingPost.value.id, postData)
+    await weblogStore.updatePost(editingPost.value.id, postData)
     editingPost.value = null
     await loadMyPosts()
   } catch (err) {
@@ -172,19 +172,19 @@ const handleUpdatePost = async (postData: Partial<BlogPost>) => {
   }
 }
 
-const viewPost = (post: BlogPost) => {
-  router.push({ name: 'blog-post', params: { slug: post.slug } })
+const viewPost = (post: WeblogPost) => {
+  router.push({ name: 'weblog-post', params: { slug: post.slug } })
 }
 
-const editPost = (post: BlogPost) => {
+const editPost = (post: WeblogPost) => {
   editingPost.value = { ...post }
 }
 
-const deletePost = async (post: BlogPost) => {
+const deletePost = async (post: WeblogPost) => {
   if (!confirm('آیا از حذف این مقاله اطمینان دارید؟')) return
 
   try {
-    await blogStore.deletePost(post.id)
+    await weblogStore.deletePost(post.id)
     await loadMyPosts()
   } catch (err) {
     console.error('Error deleting post:', err)
@@ -202,7 +202,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.blog-manage-view {
+.weblog-manage-view {
   min-height: 70vh;
 }
 </style>

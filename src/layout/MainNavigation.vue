@@ -19,7 +19,7 @@ const isOpen = ref(false)
 const router = useRouter()
 const allRoutes = router
 .getRoutes()
-.filter(route => route.meta?.icon && route.meta?.showInNav !== false)
+.filter(route => route.meta?.icon)
 
 
 const toggleMenu = () => {

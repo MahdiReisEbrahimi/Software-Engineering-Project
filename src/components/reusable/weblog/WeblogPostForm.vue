@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-post-form fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+  <div class="weblog-post-form fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
     <div class="relative top-20 mx-auto p-5 border w-full max-w-2xl shadow-lg rounded-xl bg-white">
       <!-- هدر -->
       <div class="flex justify-between items-center mb-6">
@@ -160,19 +160,19 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import { useBlogStore } from '@/stores/blogStore'
-import type { BlogPost, CreateBlogPostDto, UpdateBlogPostDto } from '@/Types/blog'
+import { useWeblogStore } from '@/stores/weblogStore'
+import type { WeblogPost, CreateWeblogPostDto, UpdateWeblogPostDto } from '@/types/weblog'
 
 const props = defineProps<{
-  post?: BlogPost
+  post?: WeblogPost
 }>()
 
 const emit = defineEmits<{
-  submit: [data: CreateBlogPostDto | UpdateBlogPostDto]
+  submit: [data: CreateWeblogPostDto | UpdateWeblogPostDto]
   cancel: []
 }>()
 
-const blogStore = useBlogStore()
+const weblogStore = useWeblogStore()
 const categories = ref<any[]>([])
 const submitting = ref(false)
 const errors = ref<string[]>([])
@@ -203,7 +203,7 @@ onMounted(() => {
     }
   }
   // دریافت دسته‌بندی‌ها
-  categories.value = blogStore.categories
+  categories.value = weblogStore.categories
 })
 
 const validateForm = (): boolean => {
@@ -248,7 +248,7 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.blog-post-form {
+.weblog-post-form {
   font-family: system-ui, -apple-system, sans-serif;
 }
 </style>

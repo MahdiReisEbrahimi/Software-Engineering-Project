@@ -1,6 +1,4 @@
-// src/types/blog.ts
-
-export interface BlogPost {
+export interface WeblogPost {
   id: number;
   categoryId: number;
   title: string;
@@ -14,18 +12,17 @@ export interface BlogPost {
   viewCount: number;
   createdAt: string;
   updatedAt: string;
-  // Optional fields from relations
   author?: {
     id: number;
     name: string;
     email?: string;
     avatar?: string;
   };
-  category?: BlogCategory;
+  category?: WeblogCategory;
   tags?: string[];
 }
 
-export interface BlogCategory {
+export interface WeblogCategory {
   id: number;
   name: string;
   slug: string;
@@ -35,7 +32,7 @@ export interface BlogCategory {
   updatedAt?: string;
 }
 
-export interface CreateBlogPostDto {
+export interface CreateWeblogPostDto {
   categoryId: number;
   title: string;
   slug: string;
@@ -45,9 +42,9 @@ export interface CreateBlogPostDto {
   isPublished: boolean;
 }
 
-export interface UpdateBlogPostDto extends Partial<CreateBlogPostDto> {}
+export interface UpdateWeblogPostDto extends Partial<CreateWeblogPostDto> {}
 
-export interface BlogFilters {
+export interface WeblogFilters {
   skip?: number;
   limit?: number;
   published_only?: boolean;
@@ -55,14 +52,14 @@ export interface BlogFilters {
   search?: string;
 }
 
-export interface BlogPagination {
+export interface WeblogPagination {
   currentPage: number;
   totalPages: number;
   totalItems: number;
   itemsPerPage: number;
 }
 
-export interface BlogStats {
+export interface WeblogStats {
   totalPosts: number;
   publishedPosts: number;
   totalViews: number;

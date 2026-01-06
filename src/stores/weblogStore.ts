@@ -1,21 +1,21 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { BlogPost, BlogCategory, CreateBlogPostDto, UpdateBlogPostDto, BlogFilters } from '@/Types/blog'
+import type { WeblogPost, WeblogCategory, CreateWeblogPostDto, UpdateWeblogPostDto, WeblogFilters } from '@/types/weblog'
 import api from '@/services/api'
 
-export const useBlogStore = defineStore('blog', () => {
-  const posts = ref<BlogPost[]>([])
-  const categories = ref<BlogCategory[]>([])
-  const currentPost = ref<BlogPost | null>(null)
-  const currentCategory = ref<BlogCategory | null>(null)
+export const useWeblogStore = defineStore('weblog', () => {
+  const posts = ref<WeblogPost[]>([])
+  const categories = ref<WebblogCategory[]>([])
+  const currentPost = ref<WeblogPost | null>(null)
+  const currentCategory = ref<WebblogCategory | null>(null)
   const loading = ref(false)
   const error = ref<string | null>(null)
 
   // دریافت همه مقالات
-  const fetchPosts = async (params?: BlogFilters) => {
+  const fetchPosts = async (params?: WeblogFilters) => {
     loading.value = true
     try {
-      const response = await api.get('/blog-posts/', { params })
+      const response = await api.get('/weblog-posts/', { params })
       posts.value = response.data
     } catch (err: any) {
       error.value = err.message
@@ -29,7 +29,7 @@ export const useBlogStore = defineStore('blog', () => {
   const fetchPostById = async (postId: number) => {
     loading.value = true
     try {
-      const response = await api.get(`/blog-posts/${postId}`)
+      const response = await api.get(`/weblog-posts/${postId}`)
       currentPost.value = response.data
     } catch (err: any) {
       error.value = err.message
@@ -43,7 +43,7 @@ export const useBlogStore = defineStore('blog', () => {
   const fetchPostBySlug = async (slug: string) => {
     loading.value = true
     try {
-      const response = await api.get(`/blog-posts/slug/${slug}`)
+      const response = await api.get(`/weblog-posts/slug/${slug}`)
       currentPost.value = response.data
     } catch (err: any) {
       error.value = err.message
@@ -54,10 +54,10 @@ export const useBlogStore = defineStore('blog', () => {
   }
 
   // ایجاد مقاله جدید
-  const createPost = async (postData: CreateBlogPostDto) => {
+  const createPost = async (postData: CreateWeblogPostDto) => {
     loading.value = true
     try {
-      const response = await api.post('/blog-posts/', postData)
+      const response = await api.post('/weblog-posts/', postData)
       posts.value.unshift(response.data)
       return response.data
     } catch (err: any) {
@@ -70,10 +70,10 @@ export const useBlogStore = defineStore('blog', () => {
   }
 
   // به‌روزرسانی مقاله
-  const updatePost = async (postId: number, postData: UpdateBlogPostDto) => {
+  const updatePost = async (postId: number, postData: UpdateWeblogPostDto) => {
     loading.value = true
     try {
-      const response = await api.put(`/blog-posts/${postId}`, postData)
+      const response = await api.put(`/weblog-posts/${postId}`, postData)
       const index = posts.value.findIndex(p => p.id === postId)
       if (index !== -1) {
         posts.value[index] = response.data
@@ -95,7 +95,7 @@ export const useBlogStore = defineStore('blog', () => {
   const deletePost = async (postId: number) => {
     loading.value = true
     try {
-      await api.delete(`/blog-posts/${postId}`)
+      await api.delete(`/weblog-posts/${postId}`)
       posts.value = posts.value.filter(p => p.id !== postId)
       if (currentPost.value?.id === postId) {
         currentPost.value = null
@@ -113,7 +113,7 @@ export const useBlogStore = defineStore('blog', () => {
   const fetchMyPosts = async (params?: { skip?: number; limit?: number }) => {
     loading.value = true
     try {
-      const response = await api.get('/blog-posts/my-posts/', { params })
+      const response = await api.get('/weblog-posts/my-posts/', { params })
       return response.data
     } catch (err: any) {
       error.value = err.message
@@ -128,11 +128,6 @@ export const useBlogStore = defineStore('blog', () => {
   const fetchCategories = async () => {
     loading.value = true
     try {
-      // فرض کنید endpoint دسته‌بندی‌ها وجود دارد
-      // const response = await api.get('/blog-categories/')
-      // categories.value = response.data
-
-      // Mock data تا زمانی که API آماده شود
       categories.value = [
         { id: 1, name: 'حقوق خانواده', slug: 'family-law', postCount: 12 },
         { id: 2, name: 'حقوق تجارت', slug: 'commercial-law', postCount: 8 },
@@ -150,14 +145,10 @@ export const useBlogStore = defineStore('blog', () => {
   }
 
   // ایجاد دسته‌بندی جدید
-  const createCategory = async (categoryData: Partial<BlogCategory>) => {
+  const createCategory = async (categoryData: Partial<WeblogCategory>) => {
     loading.value = true
     try {
-      // const response = await api.post('/blog-categories/', categoryData)
-      // categories.value.push(response.data)
-
-      // Mock response
-      const newCategory: BlogCategory = {
+      const newCategory: WeblogCategory = {
         id: categories.value.length + 1,
         name: categoryData.name || 'New Category',
         slug: categoryData.name?.replace(/\s+/g, '-').toLowerCase() || 'new-category',
@@ -176,15 +167,12 @@ export const useBlogStore = defineStore('blog', () => {
   }
 
   return {
-    // stateها
     posts,
     categories,
     currentPost,
     currentCategory,
     loading,
     error,
-
-    // actions
     fetchPosts,
     fetchPostById,
     fetchPostBySlug,

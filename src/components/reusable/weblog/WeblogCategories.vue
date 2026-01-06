@@ -1,11 +1,9 @@
 <template>
-  <div class="blog-categories bg-white rounded-xl shadow p-6">
-    <!-- عنوان -->
+  <div class="weblog-categories bg-white rounded-xl shadow p-6">
     <h3 class="text-xl font-bold text-gray-900 mb-4 pb-3 border-b border-gray-200">
       دسته‌بندی‌ها
     </h3>
 
-    <!-- جستجو در دسته‌بندی‌ها -->
     <div class="mb-4">
       <input
         v-model="searchQuery"
@@ -15,9 +13,7 @@
       />
     </div>
 
-    <!-- لیست دسته‌بندی‌ها -->
     <ul class="space-y-2 max-h-96 overflow-y-auto">
-      <!-- گزینه همه دسته‌بندی‌ها -->
       <li>
         <button
           @click="selectCategory(null)"
@@ -35,7 +31,6 @@
         </button>
       </li>
 
-      <!-- دسته‌بندی‌ها -->
       <li v-for="category in filteredCategories" :key="category.id">
         <button
           @click="selectCategory(category.id)"
@@ -47,7 +42,6 @@
           ]"
         >
           <div class="flex items-center">
-            <!-- آیکون دسته‌بندی -->
             <div class="ml-3 w-2 h-2 rounded-full bg-blue-500"></div>
             <span class="font-medium text-right">{{ category.name }}</span>
           </div>
@@ -57,18 +51,15 @@
         </button>
       </li>
 
-      <!-- حالت خالی -->
       <li v-if="filteredCategories.length === 0 && searchQuery" class="text-center py-4">
         <p class="text-gray-500 text-sm">دسته‌بندی یافت نشد</p>
       </li>
 
-      <!-- لودینگ -->
       <li v-if="loading" class="text-center py-4">
         <div class="inline-block animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-blue-500"></div>
       </li>
     </ul>
 
-    <!-- ایجاد دسته‌بندی جدید (برای ادمین) -->
     <div v-if="showAddCategory && (isAdmin || isLawyer)" class="mt-6 pt-6 border-t border-gray-200">
       <h4 class="text-lg font-semibold text-gray-900 mb-3">ایجاد دسته‌بندی جدید</h4>
       <form @submit.prevent="handleAddCategory" class="space-y-3">
@@ -104,7 +95,6 @@
       </form>
     </div>
 
-    <!-- دکمه ایجاد دسته‌بندی -->
     <div v-if="(isAdmin || isLawyer) && !showAddCategory" class="mt-6 pt-6 border-t border-gray-200">
       <button
         @click="showAddCategory = true"
@@ -122,10 +112,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
-import type { BlogCategory } from '@/Types/blog'
+import type { WeblogCategory } from '@/types/weblog'
 
 const props = defineProps<{
-  categories: BlogCategory[]
+  categories: WeblogCategory[]
   selectedCategoryId: number | null
   totalPosts: number
   loading?: boolean
@@ -134,7 +124,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   'update:selectedCategoryId': [id: number | null]
   'category-selected': [id: number | null]
-  'category-created': [category: BlogCategory]
+  'category-created': [category: WeblogCategory]
 }>()
 
 const authStore = useAuthStore()
@@ -147,7 +137,6 @@ const newCategory = ref({
   description: ''
 })
 
-// computed properties
 const isAdmin = computed(() => authStore.user?.role === 'admin')
 const isLawyer = computed(() => authStore.user?.role === 'lawyer')
 
@@ -163,7 +152,6 @@ const filteredCategories = computed(() => {
   )
 })
 
-// methods
 const selectCategory = (id: number | null) => {
   emit('update:selectedCategoryId', id)
   emit('category-selected', id)
@@ -174,11 +162,7 @@ const handleAddCategory = async () => {
 
   addingCategory.value = true
   try {
-    // در اینجا باید API call برای ایجاد دسته‌بندی جدید انجام شود
-    // const response = await api.post('/blog-categories/', newCategory.value)
-
-    // فعلاً به صورت mock داده ایجاد می‌کنیم
-    const mockCategory: BlogCategory = {
+    const mockCategory: WeblogCategory = {
       id: Math.floor(Math.random() * 1000) + 100,
       name: newCategory.value.name,
       description: newCategory.value.description,
@@ -188,7 +172,6 @@ const handleAddCategory = async () => {
 
     emit('category-created', mockCategory)
 
-    // ریست فرم
     newCategory.value = { name: '', description: '' }
     showAddCategory.value = false
     searchQuery.value = ''
@@ -199,22 +182,19 @@ const handleAddCategory = async () => {
   }
 }
 
-// lifecycle
 onMounted(() => {
-  // اگر دسته‌بندی‌ها خالی هستند، می‌توانیم از API دریافت کنیم
   if (props.categories.length === 0) {
-    // اینجا می‌توانید fetch categories را فراخوانی کنید
+    // fetch categories
   }
 })
 </script>
 
 <style scoped>
-.blog-categories {
+.weblog-categories {
   position: sticky;
   top: 2rem;
 }
 
-/* استایل اسکرول بار */
 ::-webkit-scrollbar {
   width: 6px;
 }
