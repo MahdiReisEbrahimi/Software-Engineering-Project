@@ -1,5 +1,5 @@
 <template>
-  <div class="weblog-list-view container mx-auto px-4 py-8">
+  <div class="weblog-list-view container mx-auto px-4 py-8 bg-gray-100">
     <div class="flex flex-col lg:flex-row gap-8">
       <aside class="lg:w-1/4">
         <WeblogCategories
@@ -16,7 +16,7 @@
       <main class="lg:w-3/4">
         <div class="text-center mb-12">
           <h1 class="text-4xl font-bold text-gray-900 mb-4">وبلاگ حقوقی</h1>
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p class="text-lg text-gray-700 max-w-2xl mx-auto">
             مقالات آموزشی حقوقی برای افزایش آگاهی عمومی در زمینه‌های مختلف قانونی
           </p>
         </div>
@@ -105,6 +105,7 @@ import { useWeblogStore } from '@/stores/weblogStore'
 import { useAuthStore } from '@/stores/authStore'
 import WeblogPostCard from '@/components/reusable/weblog/WeblogPostCard.vue'
 import WeblogCategories from '@/components/reusable/weblog/WeblogCategories.vue'
+import type { WeblogCategory, WeblogPost } from '@/Types/weblog'
 
 const router = useRouter()
 const weblogStore = useWeblogStore()
@@ -125,11 +126,11 @@ const loading = computed(() => weblogStore.loading)
 const error = computed(() => weblogStore.error)
 
 const filteredPosts = computed(() => {
-  let posts = weblogStore.posts.filter(post => post.isPublished)
+  let posts = weblogStore.posts.filter((post: WeblogPost) => post.isPublished)
 
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
-    posts = posts.filter(post =>
+    posts = posts.filter((post: WeblogPost) =>
       post.title.toLowerCase().includes(query) ||
       post.excerpt.toLowerCase().includes(query) ||
       post.content.toLowerCase().includes(query)
@@ -137,7 +138,7 @@ const filteredPosts = computed(() => {
   }
 
   if (selectedCategoryId.value) {
-    posts = posts.filter(post => post.categoryId === selectedCategoryId.value)
+    posts = posts.filter((post: WeblogPost) => post.categoryId === selectedCategoryId.value)
   }
 
   return posts
@@ -153,7 +154,7 @@ const totalPages = computed(() => {
   return Math.ceil(filteredPosts.value.length / postsPerPage)
 })
 
-const viewPost = (post: any) => {
+const viewPost = (post: WeblogPost) => {
   router.push({ name: 'weblog-post', params: { slug: post.slug } })
 }
 
@@ -163,9 +164,11 @@ const goToManage = () => {
 
 const handleCategorySelected = (categoryId: number | null) => {
   currentPage.value = 1
+  // استفاده از پارامتر
+  console.log('Selected category:', categoryId)
 }
 
-const handleCategoryCreated = (category: any) => {
+const handleCategoryCreated = (category: WeblogCategory) => {
   categories.value.push(category)
 }
 

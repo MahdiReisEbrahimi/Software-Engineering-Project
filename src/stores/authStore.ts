@@ -19,21 +19,17 @@ export interface AuthState {
   error: string | null
 }
 
-// این یک store موقت است تا زمانی که همکارتان store واقعی را بنویسد
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
   const token = ref<string | null>(null)
   const loading = ref(false)
   const error = ref<string | null>(null)
 
-  // برای تست: کاربر admin تنظیم می‌کنیم
-  // برای تست نقش‌های مختلف، مقدار role را تغییر دهید:
-  // 'admin' - 'lawyer' - 'user'
   user.value = {
     id: 1,
     name: 'ادمین تست',
     email: 'admin@test.com',
-    role: 'admin', // تغییر این مقدار برای تست نقش‌های مختلف
+    role: 'lawyer',
     phone: '09123456789',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'
   }
@@ -45,15 +41,12 @@ export const useAuthStore = defineStore('auth', () => {
   const isLawyer = computed(() => user.value?.role === 'lawyer')
   const isUser = computed(() => user.value?.role === 'user')
 
-  // توابع mock
   const login = async (credentials: { email: string; password: string }) => {
     loading.value = true
     try {
       console.log('Mock login called with:', credentials)
-      // شبیه‌سازی تأخیر شبکه
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      // برای تست، یک کاربر admin تنظیم می‌کنیم
       user.value = {
         id: 1,
         name: 'ادمین تست',
@@ -67,15 +60,16 @@ export const useAuthStore = defineStore('auth', () => {
       error.value = null
 
       return { success: true, user: user.value }
-    } catch (err: any) {
-      error.value = err.message || 'خطا در ورود'
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'خطا در ورود'
+      error.value = errorMessage
       return { success: false, error: error.value }
     } finally {
       loading.value = false
     }
   }
 
-  const register = async (userData: any) => {
+  const register = async (userData: Record<string, unknown>) => {
     loading.value = true
     try {
       console.log('Mock register called with:', userData)
@@ -83,19 +77,20 @@ export const useAuthStore = defineStore('auth', () => {
 
       user.value = {
         id: 2,
-        name: userData.name,
-        email: userData.email,
-        role: userData.role || 'user',
-        phone: userData.phone,
-        avatar: userData.avatar
+        name: userData.name as string,
+        email: userData.email as string,
+        role: (userData.role as 'user' | 'lawyer' | 'admin') || 'user',
+        phone: userData.phone as string,
+        avatar: userData.avatar as string
       }
 
       token.value = 'mock-jwt-token-' + Date.now()
       error.value = null
 
       return { success: true, user: user.value }
-    } catch (err: any) {
-      error.value = err.message || 'خطا در ثبت‌نام'
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'خطا در ثبت‌نام'
+      error.value = errorMessage
       return { success: false, error: error.value }
     } finally {
       loading.value = false
@@ -110,8 +105,9 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = null
       error.value = null
       return { success: true }
-    } catch (err: any) {
-      error.value = err.message || 'خطا در خروج'
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'خطا در خروج'
+      error.value = errorMessage
       return { success: false, error: error.value }
     } finally {
       loading.value = false
@@ -121,11 +117,11 @@ export const useAuthStore = defineStore('auth', () => {
   const checkAuth = async () => {
     loading.value = true
     try {
-      // در حالت واقعی، token را بررسی می‌کند
       await new Promise(resolve => setTimeout(resolve, 300))
       return !!user.value && !!token.value
-    } catch (err: any) {
-      error.value = err.message || 'خطا در بررسی احراز هویت'
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'خطا در بررسی احراز هویت'
+      error.value = errorMessage
       return false
     } finally {
       loading.value = false
@@ -144,8 +140,9 @@ export const useAuthStore = defineStore('auth', () => {
 
       error.value = null
       return { success: true, user: user.value }
-    } catch (err: any) {
-      error.value = err.message || 'خطا در به‌روزرسانی پروفایل'
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'خطا در به‌روزرسانی پروفایل'
+      error.value = errorMessage
       return { success: false, error: error.value }
     } finally {
       loading.value = false
@@ -162,8 +159,9 @@ export const useAuthStore = defineStore('auth', () => {
       await new Promise(resolve => setTimeout(resolve, 1000))
       error.value = null
       return { success: true }
-    } catch (err: any) {
-      error.value = err.message || 'خطا در تغییر رمز عبور'
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'خطا در تغییر رمز عبور'
+      error.value = errorMessage
       return { success: false, error: error.value }
     } finally {
       loading.value = false
@@ -177,8 +175,9 @@ export const useAuthStore = defineStore('auth', () => {
       await new Promise(resolve => setTimeout(resolve, 1000))
       error.value = null
       return { success: true }
-    } catch (err: any) {
-      error.value = err.message || 'خطا در بازیابی رمز عبور'
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'خطا در بازیابی رمز عبور'
+      error.value = errorMessage
       return { success: false, error: error.value }
     } finally {
       loading.value = false
@@ -186,19 +185,14 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   return {
-    // state
     user,
     token,
     loading,
     error,
-
-    // getters
     isAuthenticated,
     isAdmin,
     isLawyer,
     isUser,
-
-    // actions
     login,
     register,
     logout,

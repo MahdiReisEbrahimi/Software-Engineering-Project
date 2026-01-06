@@ -161,7 +161,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useWeblogStore } from '@/stores/weblogStore'
-import type { WeblogPost, CreateWeblogPostDto, UpdateWeblogPostDto } from '@/types/weblog'
+import type { WeblogPost, CreateWeblogPostDto, UpdateWeblogPostDto, WeblogCategory } from '@/Types/weblog'
 
 const props = defineProps<{
   post?: WeblogPost
@@ -173,7 +173,7 @@ const emit = defineEmits<{
 }>()
 
 const weblogStore = useWeblogStore()
-const categories = ref<any[]>([])
+const categories = ref<WeblogCategory[]>([])
 const submitting = ref(false)
 const errors = ref<string[]>([])
 

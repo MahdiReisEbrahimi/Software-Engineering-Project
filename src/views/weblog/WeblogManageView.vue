@@ -127,7 +127,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWeblogStore } from '@/stores/weblogStore'
 import WeblogPostForm from '@/components/reusable/weblog/WeblogPostForm.vue'
-import type { WeblogPost } from '@/types/weblog'
+import type { WeblogPost, CreateWeblogPostDto } from '@/Types/weblog'
 
 const router = useRouter()
 const weblogStore = useWeblogStore()
@@ -150,9 +150,9 @@ const loadMyPosts = async () => {
   }
 }
 
-const handleCreatePost = async (postData: Partial<WeblogPost>) => {
+const handleCreatePost = async (postData: CreateWeblogPostDto) => {
   try {
-    await weblogStore.createPost(postData as any)
+    await weblogStore.createPost(postData)
     showCreateForm.value = false
     await loadMyPosts()
   } catch (err) {

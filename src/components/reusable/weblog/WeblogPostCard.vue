@@ -48,9 +48,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, computed } from 'vue'
+import { computed } from 'vue'
 import { useWeblogStore } from '@/stores/weblogStore'
-import type { WeblogPost } from '@/types/weblog'
+import type { WeblogPost, WeblogCategory } from '@/Types/weblog'
 
 const props = defineProps<{
   post: WeblogPost
@@ -64,7 +64,7 @@ defineEmits<{
 const weblogStore = useWeblogStore()
 
 const categoryName = computed(() => {
-  const category = weblogStore.categories.find(c => c.id === props.post.categoryId)
+  const category = weblogStore.categories.find((category: WeblogCategory) => category.id === props.post.categoryId)
   return category?.name || 'حقوقی'
 })
 

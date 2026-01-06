@@ -97,6 +97,7 @@ import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useWeblogStore } from '@/stores/weblogStore'
 import { useAuthStore } from '@/stores/authStore'
+import type { WeblogCategory } from '@/Types/weblog'
 
 const route = useRoute()
 const router = useRouter()
@@ -146,9 +147,7 @@ const formatDate = (dateString: string) => {
 }
 
 const getCategoryName = (categoryId: number) => {
-  const category = weblogStore.categories.find((category: { id: number; name: string }) =>
-    category.id === categoryId
-  )
+  const category = weblogStore.categories.find((category: WeblogCategory) => category.id === categoryId)
   return category?.name || 'بدون دسته‌بندی'
 }
 

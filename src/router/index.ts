@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/stores/authStore'
 import { icon } from 'leaflet'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -88,24 +89,24 @@ const router = createRouter({
 })
 
 
-// // Navigation Guard برای بررسی دسترسی
-// router.beforeEach((to, from, next) => {
-//   const authStore = useAuthStore()
+// Navigation Guard برای بررسی دسترسی
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
 
-//   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-//     next({ name: 'login', query: { redirect: to.fullPath } })
-//     return
-//   }
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    next({ name: 'login', query: { redirect: to.fullPath } })
+    return
+  }
 
-//   if (to.meta.roles) {
-//     const userRole = authStore.user?.role
-//     if (!userRole || !to.meta.roles.includes(userRole)) {
-//       next({ name: 'forbidden' })
-//       return
-//     }
-//   }
+  if (to.meta.roles) {
+    const userRole = authStore.user?.role
+    if (!userRole || !(to.meta.roles as string[]).includes(userRole)) {
+      next({ name: 'forbidden' })
+      return
+    }
+  }
 
-//   next()
-// })
+  next()
+})
 
 export default router

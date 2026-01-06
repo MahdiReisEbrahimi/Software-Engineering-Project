@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { WeblogPost, WeblogCategory, CreateWeblogPostDto, UpdateWeblogPostDto, WeblogFilters } from '@/types/weblog'
+import type { WeblogPost, WeblogCategory, CreateWeblogPostDto, UpdateWeblogPostDto, WeblogFilters } from '@/Types/weblog'
 import api from '@/services/api'
 
 export const useWeblogStore = defineStore('weblog', () => {
   const posts = ref<WeblogPost[]>([])
-  const categories = ref<WebblogCategory[]>([])
+  const categories = ref<WeblogCategory[]>([])
   const currentPost = ref<WeblogPost | null>(null)
-  const currentCategory = ref<WebblogCategory | null>(null)
+  const currentCategory = ref<WeblogCategory | null>(null)
   const loading = ref(false)
   const error = ref<string | null>(null)
 
@@ -17,8 +17,8 @@ export const useWeblogStore = defineStore('weblog', () => {
     try {
       const response = await api.get('/weblog-posts/', { params })
       posts.value = response.data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = err instanceof Error ? err.message : 'خطای ناشناخته'
       console.error('Error fetching posts:', err)
     } finally {
       loading.value = false
@@ -31,8 +31,8 @@ export const useWeblogStore = defineStore('weblog', () => {
     try {
       const response = await api.get(`/weblog-posts/${postId}`)
       currentPost.value = response.data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = err instanceof Error ? err.message : 'خطای ناشناخته'
       console.error('Error fetching post:', err)
     } finally {
       loading.value = false
@@ -45,8 +45,8 @@ export const useWeblogStore = defineStore('weblog', () => {
     try {
       const response = await api.get(`/weblog-posts/slug/${slug}`)
       currentPost.value = response.data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = err instanceof Error ? err.message : 'خطای ناشناخته'
       console.error('Error fetching post by slug:', err)
     } finally {
       loading.value = false
@@ -60,8 +60,8 @@ export const useWeblogStore = defineStore('weblog', () => {
       const response = await api.post('/weblog-posts/', postData)
       posts.value.unshift(response.data)
       return response.data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = err instanceof Error ? err.message : 'خطای ناشناخته'
       console.error('Error creating post:', err)
       throw err
     } finally {
@@ -82,8 +82,8 @@ export const useWeblogStore = defineStore('weblog', () => {
         currentPost.value = response.data
       }
       return response.data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = err instanceof Error ? err.message : 'خطای ناشناخته'
       console.error('Error updating post:', err)
       throw err
     } finally {
@@ -100,8 +100,8 @@ export const useWeblogStore = defineStore('weblog', () => {
       if (currentPost.value?.id === postId) {
         currentPost.value = null
       }
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = err instanceof Error ? err.message : 'خطای ناشناخته'
       console.error('Error deleting post:', err)
       throw err
     } finally {
@@ -115,8 +115,8 @@ export const useWeblogStore = defineStore('weblog', () => {
     try {
       const response = await api.get('/weblog-posts/my-posts/', { params })
       return response.data
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = err instanceof Error ? err.message : 'خطای ناشناخته'
       console.error('Error fetching my posts:', err)
       throw err
     } finally {
@@ -136,8 +136,8 @@ export const useWeblogStore = defineStore('weblog', () => {
         { id: 5, name: 'حقوق کار', slug: 'labor-law', postCount: 6 },
         { id: 6, name: 'حقوق مالکیت', slug: 'property-law', postCount: 7 },
       ]
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = err instanceof Error ? err.message : 'خطای ناشناخته'
       console.error('Error fetching categories:', err)
     } finally {
       loading.value = false
@@ -157,8 +157,8 @@ export const useWeblogStore = defineStore('weblog', () => {
       }
       categories.value.push(newCategory)
       return newCategory
-    } catch (err: any) {
-      error.value = err.message
+    } catch (err: unknown) {
+      error.value = err instanceof Error ? err.message : 'خطای ناشناخته'
       console.error('Error creating category:', err)
       throw err
     } finally {

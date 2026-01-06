@@ -42,7 +42,8 @@ export interface CreateWeblogPostDto {
   isPublished: boolean;
 }
 
-export interface UpdateWeblogPostDto extends Partial<CreateWeblogPostDto> {}
+// حذف extends و تعریف مستقیم
+export type UpdateWeblogPostDto = Partial<CreateWeblogPostDto>;
 
 export interface WeblogFilters {
   skip?: number;

@@ -112,7 +112,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
-import type { WeblogCategory } from '@/types/weblog'
+import type { WeblogCategory } from '@/Types/weblog'
 
 const props = defineProps<{
   categories: WeblogCategory[]
@@ -146,7 +146,7 @@ const filteredCategories = computed(() => {
   }
 
   const query = searchQuery.value.toLowerCase()
-  return props.categories.filter(category =>
+  return props.categories.filter((category: WeblogCategory) =>
     category.name.toLowerCase().includes(query) ||
     (category.description && category.description.toLowerCase().includes(query))
   )
