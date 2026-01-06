@@ -1,38 +1,48 @@
 import type { BlogArticle } from '@/Types/blog'
 
-const mockBlogs: BlogArticle[] = [
+const articles: BlogArticle[] = [
   {
     id: 1,
-    title: 'حقوق دیجیتال چیست؟',
-    summary: 'آشنایی با مفهوم حقوق دیجیتال و اهمیت آن',
-    content: 'متن کامل مقاله حقوق دیجیتال...',
-    publishedAt: '2024-01-10',
+    title: 'آشنایی با حقوق شهروندی',
+    excerpt: 'در این مقاله با حقوق اساسی شهروندان آشنا می‌شوید...',
+    content: `
+      <p>
+        حقوق شهروندی مجموعه‌ای از حقوق و آزادی‌هاست که
+        هر فرد در جامعه از آن برخوردار است.
+      </p>
+      <p>
+        این حقوق شامل حق آزادی بیان، حق دادخواهی،
+        و حق امنیت اجتماعی می‌شود.
+      </p>
+    `,
     author: 'تیم حقوقی',
+    createdAt: '2024-01-10',
     isPremium: false,
   },
   {
     id: 2,
-    title: 'قراردادهای هوشمند و قانون',
-    summary: 'بررسی جایگاه قراردادهای هوشمند در حقوق',
-    content: 'متن کامل مقاله قراردادهای هوشمند...',
-    publishedAt: '2024-02-05',
-    author: 'وکیل ارشد',
+    title: 'قراردادهای کاری و نکات حقوقی',
+    excerpt: 'قبل از امضای قرارداد کاری این نکات را بدانید...',
+    content: `
+      <p>
+        قرارداد کاری یکی از مهم‌ترین اسناد حقوقی
+        بین کارفرما و کارمند است.
+      </p>
+      <p>
+        آگاهی از بندهای آن می‌تواند از اختلافات
+        آینده جلوگیری کند.
+      </p>
+    `,
+    author: 'وکیل پایه یک',
+    createdAt: '2024-01-15',
     isPremium: true,
   },
 ]
 
-export function getBlogs(): Promise<BlogArticle[]> {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(mockBlogs)
-    }, 300)
-  })
+export function getAllBlogs(): Promise<BlogArticle[]> {
+  return Promise.resolve(articles)
 }
 
 export function getBlogById(id: number): Promise<BlogArticle | undefined> {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(mockBlogs.find(blog => blog.id === id))
-    }, 300)
-  })
+  return Promise.resolve(articles.find(a => a.id === id))
 }
