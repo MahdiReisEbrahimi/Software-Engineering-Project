@@ -1,3 +1,0 @@
-<template>
-  hello lowyers
-</template>
