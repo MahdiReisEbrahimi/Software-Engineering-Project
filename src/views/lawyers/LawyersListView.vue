@@ -133,8 +133,9 @@ const loadMore = async () => {
 <style scoped>
 .lawyers-list-view {
   padding: 24px;
-  max-width: 1200px;
+  max-width: auto;
   margin: 0 auto;
+  background-color: #dedede;
 }
 
 .page-header {
